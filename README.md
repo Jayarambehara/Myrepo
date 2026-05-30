@@ -1,2 +1,1 @@
-# Testing
-this repo is testing purpose
+This repository contains programming examples and practice codes in multiple languages including Java, Python, and others. It covers basics to advanced concepts with structured topic-wise implementations
