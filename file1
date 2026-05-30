@@ -1,0 +1,75 @@
+import javax.swing.*;
+import java.awt.event.*;
+
+public class BusTicketBooking {
+
+    public static void main(String[] args) {
+
+        JFrame frame = new JFrame("Bus Ticket Booking");
+        frame.setSize(500, 350);
+        frame.setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JLabel lblName = new JLabel("Passenger Name:");
+        lblName.setBounds(30, 30, 120, 25);
+
+        JTextField txtName = new JTextField();
+        txtName.setBounds(170, 30, 200, 25);
+
+        JLabel lblFrom = new JLabel("From:");
+        lblFrom.setBounds(30, 80, 120, 25);
+
+        String cities[] = {"Hyderabad", "Vijayawada", "Visakhapatnam", "Tirupati"};
+        JComboBox<String> fromBox = new JComboBox<>(cities);
+        fromBox.setBounds(170, 80, 200, 25);
+
+        JLabel lblTo = new JLabel("To:");
+        lblTo.setBounds(30, 130, 120, 25);
+
+        JComboBox<String> toBox = new JComboBox<>(cities);
+        toBox.setBounds(170, 130, 200, 25);
+
+        JButton btnBook = new JButton("Book Ticket");
+        btnBook.setBounds(170, 190, 150, 35);
+
+        JTextArea result = new JTextArea();
+        result.setBounds(30, 240, 420, 50);
+        result.setEditable(false);
+
+        btnBook.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                String name = txtName.getText();
+                String from = fromBox.getSelectedItem().toString();
+                String to = toBox.getSelectedItem().toString();
+
+                if(name.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame,
+                            "Please Enter Passenger Name");
+                }
+                else if(from.equals(to)) {
+                    JOptionPane.showMessageDialog(frame,
+                            "Source and Destination cannot be same");
+                }
+                else {
+                    result.setText(
+                        "Ticket Booked Successfully!\n" +
+                        "Passenger: " + name +
+                        " | Route: " + from + " → " + to
+                    );
+                }
+            }
+        });
+
+        frame.add(lblName);
+        frame.add(txtName);
+        frame.add(lblFrom);
+        frame.add(fromBox);
+        frame.add(lblTo);
+        frame.add(toBox);
+        frame.add(btnBook);
+        frame.add(result);
+
+        frame.setVisible(true);
+    }
+}
