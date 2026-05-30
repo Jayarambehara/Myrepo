@@ -1,0 +1,34 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class BookingDAO {
+
+    public static void saveBooking(String bookingId, String name, String from,
+                                   String to, String type, String date, int fare) {
+
+        try {
+            Connection conn = DBConnection.getConnection();
+
+            String sql = "INSERT INTO bookings (booking_id, name, source, destination, service_type, travel_date, fare) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, bookingId);
+            ps.setString(2, name);
+            ps.setString(3, from);
+            ps.setString(4, to);
+            ps.setString(5, type);
+            ps.setString(6, date);
+            ps.setInt(7, fare);
+
+            ps.executeUpdate();
+
+            System.out.println("Booking Saved in DB ✅");
+
+            conn.close();
+
+        } catch (Exception e) {
+            System.out.println("Error inserting booking ❌");
+            e.printStackTrace();
+        }
+    }
+}
