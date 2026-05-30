@@ -1,0 +1,85 @@
+
+# 1. CREATE SET
+numbers = {1, 2, 3, 4, 5, 5, 6}
+print("Set (duplicates removed automatically):", numbers)
+
+
+# 2. ADD ELEMENT
+numbers.add(10)
+print("\nAfter Add:", numbers)
+
+
+# 3. ADD MULTIPLE ELEMENTS (update)
+numbers.update([20, 30, 40])
+print("\nAfter Update:", numbers)
+
+
+# 4. REMOVE ELEMENT
+numbers.remove(3)
+print("\nAfter Remove:", numbers)
+
+
+# 5. DISCARD (no error if item not found)
+numbers.discard(100)
+print("\nAfter Discard:", numbers)
+
+
+# 6. POP ELEMENT (random remove)
+removed = numbers.pop()
+print("\nPopped Element:", removed)
+print("After Pop:", numbers)
+
+
+# 7. CLEAR SET
+temp = {1, 2, 3}
+temp.clear()
+print("\nCleared Set:", temp)
+
+
+# 8. LOOP THROUGH SET
+print("\nLooping Set:")
+for num in numbers:
+    print(num)
+
+
+# 9. MEMBERSHIP CHECK
+print("\nCheck 10 in set:", 10 in numbers)
+
+
+# 10. SET OPERATIONS (UNION, INTERSECTION, DIFFERENCE)
+
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+print("\nUnion:", a | b)
+print("Intersection:", a & b)
+print("Difference A-B:", a - b)
+print("Difference B-A:", b - a)
+
+
+# 11. SYMMETRIC DIFFERENCE
+print("\nSymmetric Difference:", a ^ b)
+
+
+# 12. COPY SET
+copy_set = a.copy()
+print("\nCopied Set:", copy_set)
+
+
+# 13. LENGTH OF SET
+print("Length of set:", len(a))
+
+
+# 14. REAL TIME EXAMPLE (STUDENT ATTENDANCE SYSTEM)
+
+attendance_day1 = {"Ravi", "Ram", "Sai"}
+attendance_day2 = {"Ram", "Krishna", "Sai"}
+
+# Students present in both days
+both_days = attendance_day1 & attendance_day2
+
+# Total unique students
+all_students = attendance_day1 | attendance_day2
+
+print("\nPresent in both days:", both_days)
+print("All students:", all_students)

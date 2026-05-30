@@ -1,0 +1,94 @@
+
+import numpy as np
+
+
+# 1. CREATE ARRAY
+arr = np.array([1, 2, 3, 4, 5])
+print("Array:", arr)
+
+
+# 2. 2D ARRAY
+arr2d = np.array([[1, 2, 3], [4, 5, 6]])
+print("\n2D Array:\n", arr2d)
+
+
+# 3. ARRAY PROPERTIES
+print("\nShape:", arr2d.shape)
+print("Size:", arr2d.size)
+print("Dimension:", arr2d.ndim)
+
+
+# 4. ZEROS ARRAY
+zeros = np.zeros((3, 3))
+print("\nZeros Array:\n", zeros)
+
+
+# 5. ONES ARRAY
+ones = np.ones((2, 4))
+print("\nOnes Array:\n", ones)
+
+
+# 6. ARANGE (RANGE LIKE LOOP)
+range_arr = np.arange(1, 11)
+print("\nArange Array:", range_arr)
+
+
+# 7. RANDOM NUMBERS
+random_arr = np.random.randint(1, 100, 5)
+print("\nRandom Array:", random_arr)
+
+
+# 8. BASIC OPERATIONS
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print("\nAddition:", a + b)
+print("Subtraction:", a - b)
+print("Multiplication:", a * b)
+print("Division:", a / b)
+
+
+# 9. MATRIX OPERATIONS
+mat1 = np.array([[1, 2], [3, 4]])
+mat2 = np.array([[5, 6], [7, 8]])
+
+print("\nMatrix Multiplication:\n", np.dot(mat1, mat2))
+
+
+# 10. RESHAPE ARRAY
+arr = np.array([1, 2, 3, 4, 5, 6])
+reshaped = arr.reshape(2, 3)
+
+print("\nReshaped Array:\n", reshaped)
+
+
+# 11. INDEXING
+arr = np.array([10, 20, 30, 40])
+print("\nFirst Element:", arr[0])
+print("Last Element:", arr[-1])
+
+
+# 12. SLICING
+print("\nSlicing:", arr[1:3])
+
+
+# 13. SUM, MIN, MAX
+arr = np.array([5, 10, 15, 20])
+
+print("\nSum:", np.sum(arr))
+print("Min:", np.min(arr))
+print("Max:", np.max(arr))
+
+
+# 14. MEAN, MEDIAN, STD
+print("\nMean:", np.mean(arr))
+print("Median:", np.median(arr))
+print("Std Dev:", np.std(arr))
+
+
+# 15. REAL TIME EXAMPLE (MARKS ANALYSIS)
+marks = np.array([35, 50, 75, 90, 60])
+
+print("\nMarks:", marks)
+print("Passed:", marks[marks >= 35])
+print("Average Marks:", np.mean(marks))

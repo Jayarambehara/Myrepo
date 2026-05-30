@@ -1,0 +1,68 @@
+
+# 1. SIMPLE LAMBDA FUNCTION
+square = lambda x: x * x
+print("Square:", square(5))
+
+
+# 2. TWO PARAMETERS
+add = lambda a, b: a + b
+print("Sum:", add(10, 20))
+
+
+# 3. THREE NUMBERS (MAX FIND)
+maximum = lambda a, b, c: max(a, b, c)
+print("Max:", maximum(10, 25, 15))
+
+
+# 4. LAMBDA WITH IF ELSE
+check_even = lambda x: "Even" if x % 2 == 0 else "Odd"
+print(check_even(7))
+print(check_even(8))
+
+
+# 5. LAMBDA WITH MAP()
+numbers = [1, 2, 3, 4, 5]
+
+squares = list(map(lambda x: x * x, numbers))
+print("Squares:", squares)
+
+
+# 6. LAMBDA WITH FILTER()
+nums = [10, 15, 20, 25, 30]
+
+even_numbers = list(filter(lambda x: x % 2 == 0, nums))
+print("Even Numbers:", even_numbers)
+
+
+# 7. LAMBDA WITH SORT (CUSTOM SORT)
+students = [("Ravi", 80), ("Ram", 95), ("Krishna", 70)]
+
+sorted_students = sorted(students, key=lambda x: x[1])
+print("Sorted by marks:", sorted_students)
+
+
+# 8. LAMBDA INSIDE FUNCTION
+def multiply_by(n):
+    return lambda x: x * n
+
+double = multiply_by(2)
+triple = multiply_by(3)
+
+print("Double:", double(5))
+print("Triple:", triple(5))
+
+
+# 9. LAMBDA WITH REDUCE (TOTAL SUM)
+from functools import reduce
+
+nums = [1, 2, 3, 4, 5]
+
+total = reduce(lambda x, y: x + y, nums)
+print("Total Sum:", total)
+
+
+# 10. REAL TIME EXAMPLE (DISCOUNT CALCULATION)
+prices = [1000, 2000, 3000]
+
+discount = list(map(lambda x: x - (x * 0.1), prices))
+print("After Discount:", discount)

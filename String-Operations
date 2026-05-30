@@ -1,0 +1,98 @@
+
+# 1. CREATE STRING
+text = "Hello Python Programming"
+print("Original String:", text)
+
+
+# 2. UPPER & LOWER CASE
+print("\nUppercase:", text.upper())
+print("Lowercase:", text.lower())
+
+
+# 3. TITLE & CAPITALIZE
+print("\nTitle Case:", text.title())
+print("Capitalize:", text.capitalize())
+
+
+# 4. LENGTH OF STRING
+print("\nLength:", len(text))
+
+
+# 5. INDEXING
+print("\nFirst Character:", text[0])
+print("Last Character:", text[-1])
+
+
+# 6. SLICING
+print("\nSlice (0-5):", text[0:5])
+print("Slice (6-12):", text[6:12])
+
+
+# 7. REPLACE STRING
+new_text = text.replace("Python", "Java")
+print("\nAfter Replace:", new_text)
+
+
+# 8. FIND & INDEX
+print("\nFind 'Python':", text.find("Python"))
+print("Index 'Python':", text.index("Python"))
+
+
+# 9. SPLIT STRING
+words = text.split()
+print("\nSplit Words:", words)
+
+
+# 10. JOIN STRING
+joined = "-".join(words)
+print("\nJoined String:", joined)
+
+
+# 11. CHECK STARTSWITH & ENDSWITH
+print("\nStarts with 'Hello':", text.startswith("Hello"))
+print("Ends with 'Programming':", text.endswith("Programming"))
+
+
+# 12. REMOVE SPACES
+space_text = "   Python   "
+print("\nStrip:", space_text.strip())
+
+
+# 13. COUNT CHARACTER
+print("\nCount 'o':", text.count("o"))
+
+
+# 14. STRING CHECKS
+sample = "Python123"
+
+print("\nIs Alpha:", sample.isalpha())
+print("Is Digit:", sample.isdigit())
+print("Is Alphanumeric:", sample.isalnum())
+
+
+# 15. LOOP THROUGH STRING
+print("\nLooping String:")
+for ch in "Ravi":
+    print(ch)
+
+
+# 16. REVERSE STRING
+print("\nReverse String:", text[::-1])
+
+
+# 17. PALINDROME CHECK
+word = "madam"
+
+if word == word[::-1]:
+    print("\nPalindrome")
+else:
+    print("\nNot Palindrome")
+
+
+# 18. REAL TIME EXAMPLE (USERNAME VALIDATION)
+username = "Ravi123"
+
+if username.isalnum() and len(username) >= 5:
+    print("\nValid Username")
+else:
+    print("\nInvalid Username")

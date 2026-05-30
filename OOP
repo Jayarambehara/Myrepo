@@ -1,0 +1,138 @@
+
+# 1. BASIC CLASS & OBJECT
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def show(self):
+        print("Name:", self.name)
+        print("Age:", self.age)
+
+
+s1 = Student("Ravi", 25)
+s1.show()
+
+
+# 2. ENCAPSULATION (DATA HIDE CONCEPT)
+class Bank:
+    def __init__(self):
+        self.__balance = 0   # private variable
+
+    def deposit(self, amount):
+        self.__balance += amount
+
+    def get_balance(self):
+        return self.__balance
+
+
+b = Bank()
+b.deposit(1000)
+b.deposit(500)
+
+print("\nBalance:", b.get_balance())
+
+
+# 3. INHERITANCE
+class Animal:
+    def sound(self):
+        print("\nAnimal makes sound")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+d = Dog()
+d.sound()
+d.bark()
+
+
+# 4. METHOD OVERRIDING (POLYMORPHISM)
+class Vehicle:
+    def run(self):
+        print("\nVehicle is running")
+
+class Car(Vehicle):
+    def run(self):
+        print("Car is running fast")
+
+c = Car()
+c.run()
+
+
+# 5. SUPER() FUNCTION
+class A:
+    def show(self):
+        print("\nClass A")
+
+class B(A):
+    def show(self):
+        super().show()
+        print("Class B")
+
+obj = B()
+obj.show()
+
+
+# 6. CONSTRUCTOR OVERLOADING STYLE (DEFAULT VALUES)
+class Employee:
+    def __init__(self, name="Unknown", salary=0):
+        self.name = name
+        self.salary = salary
+
+    def display(self):
+        print("\nEmployee:", self.name)
+        print("Salary:", self.salary)
+
+
+e1 = Employee("Ravi", 50000)
+e2 = Employee()
+
+e1.display()
+e2.display()
+
+
+# 7. MULTIPLE INHERITANCE
+class Father:
+    def skills(self):
+        print("\nFather: Farming")
+
+class Mother:
+    def cooking(self):
+        print("Mother: Cooking")
+
+class Child(Father, Mother):
+    def study(self):
+        print("Child: Studying")
+
+ch = Child()
+ch.skills()
+ch.cooking()
+ch.study()
+
+
+# 8. REAL TIME EXAMPLE (BANK SYSTEM)
+class Account:
+    def __init__(self, name, balance):
+        self.name = name
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        print("\nDeposited:", amount)
+
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            print("Withdrawn:", amount)
+        else:
+            print("Insufficient Balance")
+
+    def show_balance(self):
+        print("Final Balance:", self.balance)
+
+
+acc = Account("Ravi", 1000)
+acc.deposit(500)
+acc.withdraw(300)
+acc.show_balance()

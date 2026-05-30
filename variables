@@ -1,0 +1,93 @@
+
+# 1. BASIC VARIABLES
+name = "Ravi"
+age = 25
+salary = 50000.50
+is_employee = True
+
+print("Name:", name)
+print("Age:", age)
+print("Salary:", salary)
+print("Employee:", is_employee)
+
+
+# 2. MULTIPLE ASSIGNMENT
+a, b, c = 10, 20, 30
+print("\nMultiple Variables:", a, b, c)
+
+
+# 3. SAME VALUE TO MULTIPLE VARIABLES
+x = y = z = 100
+print("\nSame Value Variables:", x, y, z)
+
+
+# 4. VARIABLE REASSIGNMENT
+marks = 80
+print("\nOriginal Marks:", marks)
+
+marks = 95
+print("Updated Marks:", marks)
+
+
+# 5. TYPE CHECKING
+print("\nData Types:")
+print(type(name))
+print(type(age))
+print(type(salary))
+print(type(is_employee))
+
+
+# 6. TYPE CONVERSION
+num_str = "50"
+num_int = int(num_str)
+num_float = float(num_int)
+
+print("\nType Conversion:")
+print("String:", num_str)
+print("Integer:", num_int)
+print("Float:", num_float)
+
+
+# 7. USER INPUT VARIABLES
+user_name = input("\nEnter your name: ")
+user_age = int(input("Enter your age: "))
+
+print("Hello", user_name)
+print("Age:", user_age)
+
+
+# 8. GLOBAL & LOCAL VARIABLES
+global_var = "I am Global"
+
+def show():
+    local_var = "I am Local"
+    print("\nInside Function:")
+    print(global_var)
+    print(local_var)
+
+show()
+
+
+# 9. VARIABLE SWAPPING
+a = 5
+b = 10
+
+print("\nBefore Swap:", a, b)
+
+a, b = b, a
+
+print("After Swap:", a, b)
+
+
+# 10. REAL TIME EXAMPLE (STUDENT RESULT SYSTEM)
+student_name = "Ravi"
+student_marks = 85
+
+print("\nStudent Result:")
+print("Name:", student_name)
+print("Marks:", student_marks)
+
+if student_marks >= 35:
+    print("Result: Pass")
+else:
+    print("Result: Fail")

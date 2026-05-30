@@ -1,0 +1,93 @@
+
+import pandas as pd
+
+
+# 1. CREATE DATAFRAME
+data = {
+    "Name": ["Ravi", "Ram", "Krishna", "Sai"],
+    "Age": [25, 30, 22, 28],
+    "Marks": [85, 90, 75, 80]
+}
+
+df = pd.DataFrame(data)
+
+print("DataFrame:\n", df)
+
+
+# 2. HEAD & TAIL
+print("\nFirst 2 rows:\n", df.head(2))
+print("\nLast 2 rows:\n", df.tail(2))
+
+
+# 3. COLUMN ACCESS
+print("\nNames Column:\n", df["Name"])
+
+
+# 4. ADD NEW COLUMN
+df["Grade"] = ["A", "A+", "B", "A"]
+
+print("\nAfter adding Grade:\n", df)
+
+
+# 5. DELETE COLUMN
+df.drop("Age", axis=1, inplace=True)
+
+print("\nAfter deleting Age column:\n", df)
+
+
+# 6. FILTER DATA
+high_marks = df[df["Marks"] > 80]
+
+print("\nStudents with Marks > 80:\n", high_marks)
+
+
+# 7. SORT DATA
+sorted_df = df.sort_values(by="Marks", ascending=False)
+
+print("\nSorted by Marks:\n", sorted_df)
+
+
+# 8. STATISTICS
+print("\nMean Marks:", df["Marks"].mean())
+print("Max Marks:", df["Marks"].max())
+print("Min Marks:", df["Marks"].min())
+
+
+# 9. READ CSV (example)
+# df_csv = pd.read_csv("data.csv")
+# print(df_csv)
+
+
+# 10. GROUP BY EXAMPLE
+df2 = pd.DataFrame({
+    "Department": ["IT", "HR", "IT", "HR"],
+    "Salary": [50000, 40000, 60000, 45000]
+})
+
+grouped = df2.groupby("Department")["Salary"].mean()
+
+print("\nGroup By Department:\n", grouped)
+
+
+# 11. FILL MISSING VALUES
+df3 = pd.DataFrame({
+    "Name": ["A", "B", "C"],
+    "Marks": [90, None, 80]
+})
+
+df3["Marks"].fillna(0, inplace=True)
+
+print("\nAfter filling missing values:\n", df3)
+
+
+# 12. REAL TIME EXAMPLE (STUDENT RESULT SYSTEM)
+students = pd.DataFrame({
+    "Name": ["Ravi", "Ram", "Sai"],
+    "Marks": [88, 45, 70]
+})
+
+students["Result"] = students["Marks"].apply(
+    lambda x: "Pass" if x >= 50 else "Fail"
+)
+
+print("\nStudent Results:\n", students)

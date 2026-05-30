@@ -1,0 +1,88 @@
+
+import os
+
+
+# 1. CREATE + WRITE FILE
+file = open("demo.txt", "w")
+file.write("Hello Python File Handling\n")
+file.write("This is first line\n")
+file.close()
+
+print("File created and written")
+
+
+# 2. READ FULL FILE
+file = open("demo.txt", "r")
+print("\n--- FULL FILE CONTENT ---")
+print(file.read())
+file.close()
+
+
+# 3. APPEND DATA (ADD NEW CONTENT)
+file = open("demo.txt", "a")
+file.write("This is appended line\n")
+file.close()
+
+print("\nData appended")
+
+
+# 4. READ LINE BY LINE
+file = open("demo.txt", "r")
+print("\n--- LINE BY LINE ---")
+
+for line in file:
+    print(line.strip())
+
+file.close()
+
+
+# 5. USING WITH STATEMENT (BEST PRACTICE)
+with open("demo.txt", "a") as file:
+    file.write("Added using WITH statement\n")
+
+with open("demo.txt", "r") as file:
+    print("\n--- FINAL CONTENT ---")
+    print(file.read())
+
+
+# 6. CHECK FILE EXISTS
+if os.path.exists("demo.txt"):
+    print("\nFile exists")
+else:
+    print("\nFile not found")
+
+
+# 7. READ FIRST N CHARACTERS
+with open("demo.txt", "r") as file:
+    print("\nFirst 20 characters:")
+    print(file.read(20))
+
+
+# 8. COUNT LINES IN FILE
+with open("demo.txt", "r") as file:
+    lines = file.readlines()
+    print("\nTotal Lines:", len(lines))
+
+
+# 9. DELETE FILE
+choice = input("\nDo you want to delete file? (yes/no): ")
+
+if choice.lower() == "yes":
+    if os.path.exists("demo.txt"):
+        os.remove("demo.txt")
+        print("File deleted")
+    else:
+        print("File not found")
+else:
+    print("File not deleted")
+
+
+# 10. REAL TIME EXAMPLE (STUDENT DATA STORE)
+
+name = input("\nEnter student name: ")
+marks = input("Enter marks: ")
+
+with open("students.txt", "a") as file:
+    file.write(f"Name: {name}, Marks: {marks}\n")
+
+print("Student data saved")

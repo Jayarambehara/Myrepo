@@ -1,0 +1,3 @@
+icolors = ("red", "green", "blue")
+
+print(colors[1]))

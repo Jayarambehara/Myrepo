@@ -1,0 +1,98 @@
+
+import os
+
+
+# -------------------------------
+# 1. CLASS (OOP)
+# -------------------------------
+class Student:
+    def __init__(self, name, age, marks):
+        self.name = name
+        self.age = age
+        self.marks = marks
+
+    def result(self):
+        if self.marks >= 35:
+            return "Pass"
+        else:
+            return "Fail"
+
+    def display(self):
+        print("\nName:", self.name)
+        print("Age:", self.age)
+        print("Marks:", self.marks)
+        print("Result:", self.result())
+
+
+# -------------------------------
+# 2. FILE NAME
+# -------------------------------
+FILE_NAME = "students.txt"
+
+
+# -------------------------------
+# 3. SAVE TO FILE (FUNCTION)
+# -------------------------------
+def save_student(student):
+    with open(FILE_NAME, "a") as file:
+        file.write(f"{student.name},{student.age},{student.marks},{student.result()}\n")
+
+
+# -------------------------------
+# 4. VIEW STUDENTS FROM FILE
+# -------------------------------
+def view_students():
+    if not os.path.exists(FILE_NAME):
+        print("\nNo records found")
+        return
+
+    print("\n--- ALL STUDENTS ---")
+
+    with open(FILE_NAME, "r") as file:
+        for line in file:
+            name, age, marks, result = line.strip().split(",")
+            print(f"Name: {name}, Age: {age}, Marks: {marks}, Result: {result}")
+
+
+# -------------------------------
+# 5. MAIN PROGRAM (LOOP MENU)
+# -------------------------------
+while True:
+
+    print("\n========= STUDENT MENU =========")
+    print("1. Add Student")
+    print("2. View Students")
+    print("3. Exit")
+
+    choice = input("Enter choice: ")
+
+    # ---------------------------
+    # ADD STUDENT
+    # ---------------------------
+    if choice == "1":
+        name = input("Enter name: ")
+        age = int(input("Enter age: "))
+        marks = int(input("Enter marks: "))
+
+        student = Student(name, age, marks)
+
+        student.display()
+        save_student(student)
+
+        print("\nStudent saved successfully!")
+
+    # ---------------------------
+    # VIEW STUDENTS
+    # ---------------------------
+    elif choice == "2":
+        view_students()
+
+    # ---------------------------
+    # EXIT
+    # ---------------------------
+    elif choice == "3":
+        print("Exiting system...")
+        break
+
+    else:
+        print("Invalid choice! Try again")

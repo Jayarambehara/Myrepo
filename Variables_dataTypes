@@ -1,0 +1,97 @@
+
+# 1. VARIABLES WITH DIFFERENT DATA TYPES
+name = "Ravi"          # string
+age = 25               # integer
+height = 5.8           # float
+is_student = True      # boolean
+
+print("Name:", name)
+print("Age:", age)
+print("Height:", height)
+print("Is Student:", is_student)
+
+
+# 2. TYPE CHECKING
+print("\nData Types:")
+print(type(name))
+print(type(age))
+print(type(height))
+print(type(is_student))
+
+
+# 3. MULTIPLE VARIABLES
+a, b, c = 10, 20, 30
+
+print("\nMultiple Variables:")
+print(a, b, c)
+
+
+# 4. SAME VALUE TO MULTIPLE VARIABLES
+x = y = z = 100
+
+print("\nSame Value Variables:")
+print(x, y, z)
+
+
+# 5. TYPE CONVERSION (STRING → INT → FLOAT)
+num_str = "50"
+num_int = int(num_str)
+num_float = float(num_int)
+
+print("\nType Conversion:")
+print("String:", num_str)
+print("Integer:", num_int)
+print("Float:", num_float)
+
+
+# 6. INPUT VARIABLES
+user_name = input("\nEnter your name: ")
+user_age = int(input("Enter your age: "))
+
+print("Hello", user_name)
+print("Age:", user_age)
+
+
+# 7. VARIABLE REASSIGNMENT
+marks = 70
+print("\nOriginal Marks:", marks)
+
+marks = 90
+print("Updated Marks:", marks)
+
+
+# 8. GLOBAL & LOCAL VARIABLES
+global_var = "I am Global"
+
+def demo():
+    local_var = "I am Local"
+    print("\nInside Function:")
+    print(global_var)
+    print(local_var)
+
+demo()
+
+
+# 9. VARIABLE SWAPPING
+a = 5
+b = 10
+
+print("\nBefore Swap:", a, b)
+
+a, b = b, a
+
+print("After Swap:", a, b)
+
+
+# 10. REAL TIME EXAMPLE (STUDENT RESULT SYSTEM)
+student_name = "Ravi"
+student_marks = 85
+
+print("\nStudent Result:")
+print("Name:", student_name)
+print("Marks:", student_marks)
+
+if student_marks >= 35:
+    print("Result: Pass")
+else:
+    print("Result: Fail")

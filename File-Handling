@@ -1,0 +1,57 @@
+import os
+
+filename = "demo.txt"
+
+# 1. CREATE + WRITE FILE
+file = open(filename, "w")
+file.write("Hello Python File Handling\n")
+file.write("This is first line\n")
+file.close()
+
+print("File created and written")
+
+# 2. READ FILE
+file = open(filename, "r")
+print("\n--- FILE CONTENT ---")
+print(file.read())
+file.close()
+
+# 3. APPEND DATA
+file = open(filename, "a")
+file.write("This is appended line\n")
+file.close()
+
+print("\nData appended")
+
+# 4. READ LINE BY LINE
+file = open(filename, "r")
+print("\n--- LINE BY LINE ---")
+for line in file:
+    print(line.strip())
+file.close()
+
+# 5. USING WITH STATEMENT (BEST METHOD)
+with open(filename, "a") as file:
+    file.write("Added using WITH statement\n")
+
+with open(filename, "r") as file:
+    print("\n--- FINAL CONTENT ---")
+    print(file.read())
+
+# 6. CHECK FILE EXISTS
+if os.path.exists(filename):
+    print("\nFile exists")
+else:
+    print("\nFile not found")
+
+# 7. DELETE FILE
+choice = input("\nDo you want to delete file? (yes/no): ")
+
+if choice.lower() == "yes":
+    if os.path.exists(filename):
+        os.remove(filename)
+        print("File deleted")
+    else:
+        print("File already not there")
+else:
+    print("File not deleted")

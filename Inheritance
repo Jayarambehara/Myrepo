@@ -1,0 +1,98 @@
+# 1. SINGLE INHERITANCE
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+d = Dog()
+d.sound()
+d.bark()
+
+
+# 2. MULTILEVEL INHERITANCE
+class Grandparent:
+    def house(self):
+        print("Grandparent house")
+
+class Parent(Grandparent):
+    def car(self):
+        print("Parent car")
+
+class Child(Parent):
+    def bike(self):
+        print("Child bike")
+
+c = Child()
+c.house()
+c.car()
+c.bike()
+
+
+# 3. MULTIPLE INHERITANCE
+class Father:
+    def skills(self):
+        print("Father: Farming skills")
+
+class Mother:
+    def cooking(self):
+        print("Mother: Cooking skills")
+
+class Child(Father, Mother):
+    def study(self):
+        print("Child: Studying")
+
+ch = Child()
+ch.skills()
+ch.cooking()
+ch.study()
+
+
+# 4. METHOD OVERRIDING (IMPORTANT)
+class Vehicle:
+    def run(self):
+        print("Vehicle is running")
+
+class Car(Vehicle):
+    def run(self):
+        print("Car is running fast")
+
+c1 = Car()
+c1.run()
+
+
+# 5. SUPER() FUNCTION USE
+class A:
+    def show(self):
+        print("Class A")
+
+class B(A):
+    def show(self):
+        super().show()
+        print("Class B")
+
+b = B()
+b.show()
+
+
+# 6. REAL TIME EXAMPLE (EMPLOYEE SYSTEM)
+class Employee:
+    def __init__(self, name):
+        self.name = name
+
+    def display(self):
+        print("Employee Name:", self.name)
+
+class Developer(Employee):
+    def __init__(self, name, language):
+        super().__init__(name)
+        self.language = language
+
+    def show(self):
+        print("Name:", self.name)
+        print("Language:", self.language)
+
+emp = Developer("Ravi", "Python")
+emp.show()

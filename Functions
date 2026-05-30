@@ -1,0 +1,89 @@
+# 1. SIMPLE FUNCTION
+def greet():
+    print("Hello! Welcome to Python")
+
+greet()
+
+
+# 2. FUNCTION WITH PARAMETERS
+def add(a, b):
+    print("Sum:", a + b)
+
+add(10, 20)
+
+
+# 3. FUNCTION WITH RETURN VALUE
+def multiply(a, b):
+    return a * b
+
+result = multiply(5, 4)
+print("Multiplication:", result)
+
+
+# 4. DEFAULT ARGUMENT FUNCTION
+def student(name="Guest"):
+    print("Student Name:", name)
+
+student()
+student("Ravi")
+
+
+# 5. KEYWORD ARGUMENTS
+def info(name, age):
+    print("Name:", name)
+    print("Age:", age)
+
+info(age=25, name="Ram")
+
+
+# 6. VARIABLE LENGTH ARGUMENTS (*args)
+def total(*numbers):
+    print("Numbers:", numbers)
+    print("Sum:", sum(numbers))
+
+total(1, 2, 3, 4, 5)
+
+
+# 7. KEYWORD VARIABLE LENGTH (**kwargs)
+def employee(**data):
+    print("Employee Data:", data)
+
+employee(name="Ravi", age=30, city="Hyderabad")
+
+
+# 8. FUNCTION INSIDE FUNCTION (NESTED FUNCTION)
+def outer():
+    print("Outer Function")
+
+    def inner():
+        print("Inner Function")
+
+    inner()
+
+outer()
+
+
+# 9. LAMBDA FUNCTION (SHORT FUNCTION)
+square = lambda x: x * x
+print("Square:", square(6))
+
+
+# 10. FUNCTION CALLING ANOTHER FUNCTION
+def first():
+    print("First Function")
+
+def second():
+    print("Second Function")
+    first()
+
+second()
+
+
+# 11. RECURSION FUNCTION (FACTORIAL)
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print("Factorial:", factorial(5))

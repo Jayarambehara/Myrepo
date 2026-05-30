@@ -1,0 +1,89 @@
+# 1. SIMPLE IF ELSE
+age = 18
+
+if age >= 18:
+    print("Eligible to vote")
+else:
+    print("Not eligible to vote")
+
+
+# 2. IF ELIF ELSE (GRADE SYSTEM)
+marks = 75
+
+if marks >= 90:
+    print("Grade: A")
+elif marks >= 75:
+    print("Grade: B")
+elif marks >= 60:
+    print("Grade: C")
+else:
+    print("Fail")
+
+
+# 3. EVEN OR ODD CHECK
+num = 7
+
+if num % 2 == 0:
+    print("Even Number")
+else:
+    print("Odd Number")
+
+
+# 4. POSITIVE / NEGATIVE / ZERO
+number = -5
+
+if number > 0:
+    print("Positive Number")
+elif number < 0:
+    print("Negative Number")
+else:
+    print("Zero")
+
+
+# 5. LARGEST OF TWO NUMBERS
+a = 10
+b = 20
+
+if a > b:
+    print("A is greater")
+else:
+    print("B is greater")
+
+
+# 6. LARGEST OF THREE NUMBERS
+x = 15
+y = 25
+z = 20
+
+if x > y and x > z:
+    print("X is largest")
+elif y > x and y > z:
+    print("Y is largest")
+else:
+    print("Z is largest")
+
+
+# 7. LOGIN CHECK (REAL WORLD EXAMPLE)
+username = "admin"
+password = "1234"
+
+input_user = "admin"
+input_pass = "1234"
+
+if input_user == username and input_pass == password:
+    print("Login Success")
+else:
+    print("Login Failed")
+
+
+# 8. NESTED IF ELSE
+age = 20
+has_id = True
+
+if age >= 18:
+    if has_id:
+        print("Allowed Entry")
+    else:
+        print("ID Required")
+else:
+    print("Not allowed (below 18)"))

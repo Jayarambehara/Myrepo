@@ -1,0 +1,79 @@
+
+# 1. BASIC MAP (SQUARE OF NUMBERS)
+numbers = [1, 2, 3, 4, 5]
+
+squares = list(map(lambda x: x * x, numbers))
+print("Squares:", squares)
+
+
+# 2. MAP (ADD 10 TO EACH NUMBER)
+nums = [10, 20, 30, 40]
+
+added = list(map(lambda x: x + 10, nums))
+print("After Adding 10:", added)
+
+
+# 3. MAP WITH MULTIPLE LISTS
+a = [1, 2, 3]
+b = [4, 5, 6]
+
+sum_list = list(map(lambda x, y: x + y, a, b))
+print("Sum of two lists:", sum_list)
+
+
+# 4. CONVERT STRINGS TO UPPERCASE USING MAP
+names = ["ravi", "ram", "krishna"]
+
+upper_names = list(map(str.upper, names))
+print("Uppercase Names:", upper_names)
+
+
+# 5. FILTER (EVEN NUMBERS)
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+print("Even Numbers:", even_numbers)
+
+
+# 6. FILTER (ODD NUMBERS)
+odd_numbers = list(filter(lambda x: x % 2 != 0, numbers))
+print("Odd Numbers:", odd_numbers)
+
+
+# 7. FILTER (GREATER THAN 5)
+nums = [2, 5, 8, 1, 10, 3]
+
+greater = list(filter(lambda x: x > 5, nums))
+print("Greater than 5:", greater)
+
+
+# 8. FILTER STRINGS (LONG NAMES)
+names = ["Ravi", "Ram", "Krishna", "Sai"]
+
+long_names = list(filter(lambda x: len(x) > 3, names))
+print("Long Names:", long_names)
+
+
+# 9. MAP + FILTER TOGETHER
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = list(
+    map(
+        lambda x: x * 2,
+        filter(lambda x: x % 2 == 0, numbers)
+    )
+)
+
+print("Even numbers doubled:", result)
+
+
+# 10. REAL TIME EXAMPLE (MARKS PROCESSING)
+marks = [35, 50, 20, 75, 90, 40]
+
+# PASS STUDENTS (FILTER)
+passed = list(filter(lambda x: x >= 35, marks))
+print("Passed Students:", passed)
+
+# INCREASE MARKS BY 5 (MAP)
+updated_marks = list(map(lambda x: x + 5, marks))
+print("Updated Marks:", updated_marks)
