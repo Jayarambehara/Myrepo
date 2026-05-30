@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Menu UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>🍽️ Select Your Restaurant</h1>
+
+    <!-- Restaurant Select -->
+    <select id="restaurant" onchange="loadMenu()">
+      <option value="">-- Choose Restaurant --</option>
+      <option value="hotelA">Hotel Royal Spice</option>
+      <option value="hotelB">Green Leaf Restaurant</option>
+      <option value="hotelC">Spicy Hub</option>
+    </select>
+
+    <!-- Menu Section -->
+    <div id="menuBox" class="menu-box hidden">
+
+      <h2 id="restName"></h2>
+
+      <div class="menu-item">🍛 Biryani - ₹180</div>
+      <div class="menu-item">🍔 Burger - ₹120</div>
+      <div class="menu-item">🍕 Pizza - ₹250</div>
+      <div class="menu-item">🥤 Cold Drink - ₹50</div>
+
+      <button onclick="orderNow()">Order Now</button>
+
+      <p id="result"></p>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
