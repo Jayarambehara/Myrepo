@@ -1,42 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Restaurant Menu UI</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Restaurant UI</title>
+
+  <style>
+    body {
+      font-family: Georgia;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    select {
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    .menu-box {
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px solid gold;
+      display: none;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .menu-item {
+      background: #333;
+      margin: 5px;
+      padding: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      background: darkred;
+      color: white;
+      border: none;
+    }
+  </style>
 </head>
+
 <body>
 
-  <div class="container">
+<h1>🍽️ Restaurant Selector</h1>
 
-    <h1>🍽️ Select Your Restaurant</h1>
+<select onchange="loadMenu()" id="restaurant">
+  <option value="">Select</option>
+  <option value="A">Hotel A</option>
+  <option value="B">Hotel B</option>
+</select>
 
-    <!-- Restaurant Select -->
-    <select id="restaurant" onchange="loadMenu()">
-      <option value="">-- Choose Restaurant --</option>
-      <option value="hotelA">Hotel Royal Spice</option>
-      <option value="hotelB">Green Leaf Restaurant</option>
-      <option value="hotelC">Spicy Hub</option>
-    </select>
+<div id="menu" class="menu-box">
+  <h3 id="title"></h3>
 
-    <!-- Menu Section -->
-    <div id="menuBox" class="menu-box hidden">
+  <div class="menu-item">🍛 Biryani - ₹180</div>
+  <div class="menu-item">🍔 Burger - ₹120</div>
 
-      <h2 id="restName"></h2>
+  <button onclick="order()">Order</button>
 
-      <div class="menu-item">🍛 Biryani - ₹180</div>
-      <div class="menu-item">🍔 Burger - ₹120</div>
-      <div class="menu-item">🍕 Pizza - ₹250</div>
-      <div class="menu-item">🥤 Cold Drink - ₹50</div>
+  <p id="msg"></p>
+</div>
 
-      <button onclick="orderNow()">Order Now</button>
+<script>
+function loadMenu() {
+  let r = document.getElementById("restaurant").value;
+  let menu = document.getElementById("menu");
+  let title = document.getElementById("title");
 
-      <p id="result"></p>
+  if (r === "A") {
+    title.innerText = "Hotel A Menu";
+  } else if (r === "B") {
+    title.innerText = "Hotel B Menu";
+  } else {
+    menu.style.display = "none";
+    return;
+  }
 
-    </div>
+  menu.style.display = "block";
+}
 
-  </div>
+function order() {
+  document.getElementById("msg").innerText =
+    "Order placed successfully!";
+}
+</script>
 
-  <script src="script.js"></script>
 </body>
 </html>
