@@ -1,15 +1,72 @@
-CREATE DATABASE travel_db;
-
+CREATE DATABASE IF NOT EXISTS travel_db;
 USE travel_db;
 
-CREATE TABLE bookings (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    booking_id VARCHAR(20),
-    name VARCHAR(100),
-    source VARCHAR(100),
-    destination VARCHAR(100),
-    service_type VARCHAR(20),
-    travel_date DATE,
-    fare INT,
+-- USERS TABLE (instead of storing name directly in bookings)
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(120) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    phone VARCHAR(15) UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- LOCATIONS TABLE (source & destination normalization)
+CREATE TABLE locations (
+    location_id INT AUTO_INCREMENT PRIMARY KEY,
+    city VARCHAR(100) NOT NULL,
+    state VARCHAR(100),
+    country VARCHAR(100) DEFAULT 'India',
+    UNIQUE(city, state, country)
+);
+
+-- TRANSPORT SERVICES (bus/train/flight etc.)
+CREATE TABLE services (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    service_name VARCHAR(50) NOT NULL,
+    service_type ENUM('BUS','TRAIN','FLIGHT','CAB') NOT NULL,
+    provider VARCHAR(100),
+    base_fare INT DEFAULT 0,
+    active BOOLEAN DEFAULT TRUE
+);
+
+-- BOOKINGS TABLE (advanced version)
+CREATE TABLE bookings (
+    booking_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    booking_ref VARCHAR(25) UNIQUE NOT NULL,
+
+    user_id INT NOT NULL,
+    source_id INT NOT NULL,
+    destination_id INT NOT NULL,
+    service_id INT NOT NULL,
+
+    travel_date DATE NOT NULL,
+    booking_status ENUM('PENDING','CONFIRMED','CANCELLED','COMPLETED') DEFAULT 'PENDING',
+
+    total_fare DECIMAL(10,2) NOT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (source_id) REFERENCES locations(location_id),
+    FOREIGN KEY (destination_id) REFERENCES locations(location_id),
+    FOREIGN KEY (service_id) REFERENCES services(service_id),
+
+    INDEX idx_travel_date (travel_date),
+    INDEX idx_user (user_id),
+    INDEX idx_status (booking_status)
+);
+
+-- PAYMENTS TABLE (real-world essential)
+CREATE TABLE payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    booking_id BIGINT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_method ENUM('CARD','UPI','CASH','NETBANKING') NOT NULL,
+    payment_status ENUM('SUCCESS','FAILED','PENDING') DEFAULT 'PENDING',
+    transaction_ref VARCHAR(50),
+    paid_at TIMESTAMP NULL,
+
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE,
+    INDEX idx_payment_status (payment_status)
 );
