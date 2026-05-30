@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cab Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #000;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 12px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: black;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚕 Cab Booking (Ola Style)</h1>
+
+    <label>Passenger Name</label>
+    <input type="text" id="name">
+
+    <label>Pickup Location</label>
+    <input type="text" id="pickup">
+
+    <label>Drop Location</label>
+    <input type="text" id="drop">
+
+    <label>Cab Type</label>
+    <select id="cab">
+        <option>Mini</option>
+        <option>Prime Sedan</option>
+        <option>SUV</option>
+        <option>Luxury</option>
+    </select>
+
+    <label>Ride Date</label>
+    <input type="date" id="date">
+
+    <button onclick="bookCab()">Book Cab</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function bookCab() {
+
+    let name = document.getElementById("name").value;
+    let pickup = document.getElementById("pickup").value;
+    let drop = document.getElementById("drop").value;
+    let cab = document.getElementById("cab").value;
+    let date = document.getElementById("date").value;
+
+    let rideId = "OLA" + Math.floor(Math.random() * 900000);
+
+    let fare = Math.floor(Math.random() * 500) + 100;
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML = `
+        <h2>🚖 Ride Confirmed</h2>
+        <p><b>Ride ID:</b> ${rideId}</p>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Pickup:</b> ${pickup}</p>
+        <p><b>Drop:</b> ${drop}</p>
+        <p><b>Cab Type:</b> ${cab}</p>
+        <p><b>Date:</b> ${date}</p>
+        <p><b>Estimated Fare:</b> ₹${fare}</p>
+    `;
+}
+</script>
+
+</body>
+</html>

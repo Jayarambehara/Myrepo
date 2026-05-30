@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RedBus Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #fff5f5;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #d50000;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #d50000;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b71c1c;
+        }
+
+        #ticket {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+
+        .tag {
+            color: #d50000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚌 RedBus Ticket Booking</h1>
+
+    <label>Passenger Name</label>
+    <input type="text" id="name">
+
+    <label>From City</label>
+    <input type="text" id="from">
+
+    <label>To City</label>
+    <input type="text" id="to">
+
+    <label>Bus Type</label>
+    <select id="type">
+        <option>Seater</option>
+        <option>Sleeper</option>
+        <option>AC Sleeper</option>
+        <option>Luxury Volvo</option>
+    </select>
+
+    <label>Journey Date</label>
+    <input type="date" id="date">
+
+    <button onclick="bookBus()">Book Bus</button>
+
+    <div id="ticket"></div>
+</div>
+
+<script>
+function bookBus() {
+
+    let name = document.getElementById("name").value;
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let type = document.getElementById("type").value;
+    let date = document.getElementById("date").value;
+
+    let bookingId = "RBT" + Math.floor(Math.random() * 1000000);
+    let seatNo = Math.floor(Math.random() * 40) + 1;
+    let fare = Math.floor(Math.random() * 1200) + 300;
+
+    document.getElementById("ticket").style.display = "block";
+    document.getElementById("ticket").innerHTML = `
+        <h2>🎫 Booking Confirmed</h2>
+        <p><span class="tag">Booking ID:</span> ${bookingId}</p>
+        <p><span class="tag">Passenger:</span> ${name}</p>
+        <p><span class="tag">Route:</span> ${from} ➜ ${to}</p>
+        <p><span class="tag">Bus Type:</span> ${type}</p>
+        <p><span class="tag">Date:</span> ${date}</p>
+        <p><span class="tag">Seat No:</span> ${seatNo}</p>
+        <p><span class="tag">Fare:</span> ₹${fare}</p>
+    `;
+}
+</script>
+
+</body>
+</html>

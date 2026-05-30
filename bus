@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Service Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0077cc;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: #0077cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #005fa3;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e8f5e9;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Bus Service Booking</h1>
+
+    <label>Passenger Name</label>
+    <input type="text" id="name">
+
+    <label>From</label>
+    <input type="text" id="from">
+
+    <label>To</label>
+    <input type="text" id="to">
+
+    <label>Travel Date</label>
+    <input type="date" id="date">
+
+    <button onclick="bookBus()">Book Ticket</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function bookBus() {
+    let name = document.getElementById("name").value;
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let date = document.getElementById("date").value;
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML =
+        "<h3>Booking Confirmed</h3>" +
+        "<p><b>Name:</b> " + name + "</p>" +
+        "<p><b>Route:</b> " + from + " → " + to + "</p>" +
+        "<p><b>Date:</b> " + date + "</p>";
+}
+</script>
+
+</body>
+</html>
