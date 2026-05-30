@@ -1,0 +1,86 @@
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
+// ====== FRONTEND (ALL IN ONE FILE) ======
+app.get("/", (req, res) => {
+  res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Realtime Order Tracker</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: white;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .box {
+      border: 2px solid gold;
+      width: 320px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🚦 Realtime Order Tracking</h1>
+
+<div class="box">
+  <h2 id="status">Loading...</h2>
+
+  <button onclick="update('Order Placed')">Placed</button>
+  <button onclick="update('Preparing')">Preparing</button>
+  <button onclick="update('Out for Delivery')">Delivery</button>
+  <button onclick="update('Delivered')">Delivered</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  socket.on("status", (data) => {
+    document.getElementById("status").innerText = data;
+  });
+
+  function update(status) {
+    socket.emit("updateOrder", status);
+  }
+</script>
+
+</body>
+</html>
+  `);
+});
+
+// ====== BACKEND LOGIC ======
+let orderStatus = "Order Placed";
+
+io.on("connection", (socket) => {
+  socket.emit("status", orderStatus);
+
+  socket.on("updateOrder", (status) => {
+    orderStatus = status;
+    io.emit("status", orderStatus);
+  });
+});
+
+server.listen(3000, () => {
+  console.log("Running on http://localhost:3000");
+});
