@@ -1,0 +1,61 @@
+Git‌లో **“branches” (బ్రాంచ్‌లు)** అంటే ఒకే project code లో వేర్వేరు development “paths” లాంటివి.
+
+సింపుల్‌గా చెప్పాలంటే:
+
+👉 Branch = ఒక copy లాంటి working line, కానీ main code‌ని disturb చేయకుండా changes చేయడానికి ఉపయోగిస్తారు.
+
+---
+
+### 🔹 ఎందుకు branches వాడతారు?
+
+* కొత్త feature develop చేయడానికి
+* bug fix చేయడానికి
+* main code (`main` లేదా `master`) safe‌గా ఉంచడానికి
+
+---
+
+### 🔹 ఉదాహరణ
+
+ఒక website project ఉందనుకోండి:
+
+* `main` branch → live website code
+* `feature-login` branch → కొత్త login system develop చేయడానికి
+* `bugfix-header` branch → header issue fix చేయడానికి
+
+---
+
+### 🔹 ఎలా పని చేస్తుంది?
+
+1. మీరు `main` నుంచి కొత్త branch create చేస్తారు
+2. ఆ branch లో changes చేస్తారు
+3. work complete అయిన తర్వాత → **merge** చేసి main లో కలుపుతారు
+
+---
+
+### 🔹 Basic commands
+
+```bash
+git branch          # branches list
+git branch new-branch-name   # new branch create
+git checkout new-branch-name # branch switch
+git merge branch-name        # merge branch into current
+```
+
+(కొత్త Git version లో:)
+
+```bash
+git switch branch-name
+```
+
+---
+
+### 🧠 Easy analogy
+
+👉 Branch = “separate notebook page”
+👉 Main = “original notebook”
+👉 Merge = “notes తిరిగి original notebook లో కలపడం”
+
+---
+
+మీకు కావాలంటే నేను **diagram తో లేదా real project example తో** ఇంకా easyగా explain చేస్తాను.
+
