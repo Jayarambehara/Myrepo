@@ -1,0 +1,83 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class TravelApp {
+
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("=================================");
+        System.out.println("   🚀 Travel Booking System");
+        System.out.println("=================================");
+
+        login();
+
+        while (true) {
+            System.out.println("\nChoose Service:");
+            System.out.println("1. Bus Booking");
+            System.out.println("2. Train Booking");
+            System.out.println("3. Flight Booking");
+            System.out.println("4. Exit");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1 -> bookTicket("BUS");
+                case 2 -> bookTicket("TRAIN");
+                case 3 -> bookTicket("FLIGHT");
+                case 4 -> {
+                    System.out.println("Thank you for using Travel App 🚀");
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid Option!");
+            }
+        }
+    }
+
+    static void login() {
+        System.out.print("Enter Username: ");
+        String user = sc.nextLine();
+
+        System.out.print("Enter Password: ");
+        String pass = sc.nextLine();
+
+        if (user.equals("admin") && pass.equals("admin")) {
+            System.out.println("Login Successful ✅");
+        } else {
+            System.out.println("Invalid Login ❌ (use admin/admin)");
+            System.exit(0);
+        }
+    }
+
+    static void bookTicket(String type) {
+
+        System.out.println("\n--- " + type + " BOOKING ---");
+
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("From: ");
+        String from = sc.nextLine();
+
+        System.out.print("To: ");
+        String to = sc.nextLine();
+
+        String pnr = generatePNR(type);
+        int fare = new Random().nextInt(1000) + 200;
+
+        System.out.println("\n🎫 TICKET CONFIRMED");
+        System.out.println("-----------------------");
+        System.out.println("PNR: " + pnr);
+        System.out.println("Name: " + name);
+        System.out.println("Route: " + from + " → " + to);
+        System.out.println("Type: " + type);
+        System.out.println("Fare: ₹" + fare);
+        System.out.println("-----------------------");
+    }
+
+    static String generatePNR(String type) {
+        return type.substring(0, 3) + new Random().nextInt(999999);
+    }
+}

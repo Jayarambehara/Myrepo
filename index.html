@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Booking System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+        }
+
+        header {
+            background: #1a237e;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #1a237e;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d133d;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .highlight {
+            color: #1a237e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    🚀 Travel Booking Dashboard
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Book Your Ride</h2>
+
+        <label>Name</label>
+        <input type="text" id="name">
+
+        <label>From</label>
+        <input type="text" id="from">
+
+        <label>To</label>
+        <input type="text" id="to">
+
+        <label>Service Type</label>
+        <select id="type">
+            <option>Bus</option>
+            <option>Train</option>
+            <option>Flight</option>
+            <option>Cab</option>
+        </select>
+
+        <label>Date</label>
+        <input type="date" id="date">
+
+        <button onclick="book()">Book Now</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+</div>
+
+<script>
+function book() {
+
+    let name = document.getElementById("name").value;
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let type = document.getElementById("type").value;
+    let date = document.getElementById("date").value;
+
+    let bookingId = "TRV" + Math.floor(Math.random() * 1000000);
+    let fare = Math.floor(Math.random() * 1500) + 200;
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML = `
+        <h3>🎫 Booking Confirmed</h3>
+        <p><span class="highlight">Booking ID:</span> ${bookingId}</p>
+        <p><span class="highlight">Name:</span> ${name}</p>
+        <p><span class="highlight">Route:</span> ${from} ➜ ${to}</p>
+        <p><span class="highlight">Service:</span> ${type}</p>
+        <p><span class="highlight">Date:</span> ${date}</p>
+        <p><span class="highlight">Fare:</span> ₹${fare}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
