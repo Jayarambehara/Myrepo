@@ -1,53 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AbhiBus Booking System</title>
+    <title>AbhiBus Clone</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            background: #f3f6ff;
+            font-family: Arial;
+            background: linear-gradient(to right, #ff6a00, #ffcc00);
         }
 
-        .container {
-            max-width: 750px;
-            margin: auto;
+        .box {
+            width: 400px;
+            margin: 80px auto;
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.2);
         }
 
         h1 {
             text-align: center;
-            color: #ff6600;
-        }
-
-        label {
-            display: block;
-            margin-top: 12px;
-            font-weight: bold;
+            color: #ff6a00;
         }
 
         input, select {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            margin: 8px 0;
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background: #ff6600;
+            padding: 10px;
+            background: #ff6a00;
             color: white;
             border: none;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         button:hover {
@@ -55,73 +41,51 @@
         }
 
         #result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #eaffea;
             display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #e8f5e9;
-            border-radius: 8px;
-        }
-
-        .tag {
-            color: #ff6600;
-            font-weight: bold;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>🚌 AbhiBus Ticket Booking</h1>
+<div class="box">
+    <h1>🚌 AbhiBus Booking</h1>
 
-    <label>Passenger Name</label>
-    <input type="text" id="name">
+    <input id="from" placeholder="From City">
+    <input id="to" placeholder="To City">
 
-    <label>From City</label>
-    <input type="text" id="from">
-
-    <label>To City</label>
-    <input type="text" id="to">
-
-    <label>Bus Type</label>
     <select id="type">
         <option>Ordinary</option>
         <option>Express</option>
         <option>Sleeper</option>
-        <option>AC Volvo</option>
+        <option>AC</option>
     </select>
 
-    <label>Journey Date</label>
     <input type="date" id="date">
 
-    <button onclick="bookBus()">Search & Book</button>
+    <button onclick="book()">Search Bus</button>
 
     <div id="result"></div>
 </div>
 
 <script>
-function bookBus() {
-
-    let name = document.getElementById("name").value;
+function book() {
     let from = document.getElementById("from").value;
     let to = document.getElementById("to").value;
     let type = document.getElementById("type").value;
     let date = document.getElementById("date").value;
 
-    let bookingId = "ABH" + Math.floor(Math.random() * 1000000);
-    let seatNo = Math.floor(Math.random() * 50) + 1;
-    let fare = Math.floor(Math.random() * 1000) + 200;
+    let id = "BUS" + Math.floor(Math.random()*9999);
 
     document.getElementById("result").style.display = "block";
-    document.getElementById("result").innerHTML = `
-        <h2>🎫 Booking Confirmed</h2>
-        <p><span class="tag">Booking ID:</span> ${bookingId}</p>
-        <p><span class="tag">Passenger:</span> ${name}</p>
-        <p><span class="tag">Route:</span> ${from} ➜ ${to}</p>
-        <p><span class="tag">Bus Type:</span> ${type}</p>
-        <p><span class="tag">Date:</span> ${date}</p>
-        <p><span class="tag">Seat No:</span> ${seatNo}</p>
-        <p><span class="tag">Fare:</span> ₹${fare}</p>
-    `;
+    document.getElementById("result").innerHTML =
+        "Booking ID: " + id + "<br>" +
+        "Route: " + from + " → " + to + "<br>" +
+        "Type: " + type + "<br>" +
+        "Date: " + date;
 }
 </script>
 
