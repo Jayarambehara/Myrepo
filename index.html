@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AbhiBus Clone</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #ff6a00, #ffcc00);
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6a00;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #ff6a00;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e65c00;
+        }
+
+        #result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #eaffea;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>🚌 AbhiBus Booking</h1>
+
+    <input id="from" placeholder="From City">
+    <input id="to" placeholder="To City">
+
+    <select id="type">
+        <option>Ordinary</option>
+        <option>Express</option>
+        <option>Sleeper</option>
+        <option>AC</option>
+    </select>
+
+    <input type="date" id="date">
+
+    <button onclick="bookBus()">Search Bus</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function bookBus() {
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let type = document.getElementById("type").value;
+    let date = document.getElementById("date").value;
+
+    let bookingId = "BUS" + Math.floor(Math.random() * 99999);
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML =
+        "Booking ID: " + bookingId + "<br>" +
+        "Route: " + from + " → " + to + "<br>" +
+        "Type: " + type + "<br>" +
+        "Date: " + date;
+}
+</script>
+
+</body>
+</html>
