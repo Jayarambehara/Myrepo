@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Reservation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef3f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0f5bd3;
+        }
+
+        #ticket {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Flight Booking System ✈️</h1>
+
+    <label>Passenger Name</label>
+    <input type="text" id="name">
+
+    <label>Flight Number</label>
+    <input type="text" id="flightNo">
+
+    <label>Airline</label>
+    <input type="text" id="airline">
+
+    <label>From (Airport / City)</label>
+    <input type="text" id="from">
+
+    <label>To (Airport / City)</label>
+    <input type="text" id="to">
+
+    <label>Departure Date</label>
+    <input type="date" id="date">
+
+    <label>Class</label>
+    <select id="class">
+        <option>Economy</option>
+        <option>Premium Economy</option>
+        <option>Business</option>
+        <option>First Class</option>
+    </select>
+
+    <button onclick="bookFlight()">Book Flight</button>
+
+    <div id="ticket"></div>
+</div>
+
+<script>
+function bookFlight() {
+
+    let name = document.getElementById("name").value;
+    let flightNo = document.getElementById("flightNo").value;
+    let airline = document.getElementById("airline").value;
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let date = document.getElementById("date").value;
+    let cls = document.getElementById("class").value;
+
+    let pnr = "FLY" + Math.floor(Math.random() * 1000000);
+
+    document.getElementById("ticket").style.display = "block";
+    document.getElementById("ticket").innerHTML = `
+        <h2>✈️ Booking Confirmed</h2>
+        <p><b>PNR:</b> ${pnr}</p>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Flight:</b> ${flightNo} - ${airline}</p>
+        <p><b>Route:</b> ${from} ➜ ${to}</p>
+        <p><b>Date:</b> ${date}</p>
+        <p><b>Class:</b> ${cls}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
