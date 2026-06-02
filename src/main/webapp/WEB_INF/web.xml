@@ -5,6 +5,6 @@
          https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-    <display-name>Travel Booking App</display-name>
+    <display-name>Travel Booking Portal</display-name>
 
 </web-app>
