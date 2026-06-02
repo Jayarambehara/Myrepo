@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uber Ride Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #e6f0ff;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: black;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+
+        .tag {
+            color: #1a73e8;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚗 Uber Ride Booking</h1>
+
+    <label>Passenger Name</label>
+    <input type="text" id="name">
+
+    <label>Pickup Location</label>
+    <input type="text" id="pickup">
+
+    <label>Drop Location</label>
+    <input type="text" id="drop">
+
+    <label>Ride Type</label>
+    <select id="type">
+        <option>Uber Go</option>
+        <option>Uber X</option>
+        <option>Uber Premier</option>
+        <option>Uber XL</option>
+    </select>
+
+    <label>Ride Date</label>
+    <input type="date" id="date">
+
+    <button onclick="bookUber()">Confirm Ride</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function bookUber() {
+
+    let name = document.getElementById("name").value;
+    let pickup = document.getElementById("pickup").value;
+    let drop = document.getElementById("drop").value;
+    let type = document.getElementById("type").value;
+    let date = document.getElementById("date").value;
+
+    let rideId = "UBR" + Math.floor(Math.random() * 1000000);
+    let fare = Math.floor(Math.random() * 800) + 100;
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML = `
+        <h2>🚗 Ride Confirmed</h2>
+        <p><span class="tag">Ride ID:</span> ${rideId}</p>
+        <p><span class="tag">Name:</span> ${name}</p>
+        <p><span class="tag">Pickup:</span> ${pickup}</p>
+        <p><span class="tag">Drop:</span> ${drop}</p>
+        <p><span class="tag">Type:</span> ${type}</p>
+        <p><span class="tag">Date:</span> ${date}</p>
+        <p><span class="tag">Estimated Fare:</span> ₹${fare}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
