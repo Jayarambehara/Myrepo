@@ -1,57 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Movie Booking UI</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Booking App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+        }
+
+        .movie-card {
+            background: white;
+            width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-
-    <h1>🎬 Classic Movie Booking</h1>
-
-    <!-- Movie Select -->
-    <div class="box">
-      <label>Select Movie</label>
-      <select id="movie">
-        <option>Interstellar</option>
-        <option>Inception</option>
-        <option>RRR</option>
-        <option>Avatar</option>
-      </select>
+    <div class="header">
+        <h1>🎬 Movie Booking Application</h1>
     </div>
 
-    <!-- Theatre Select -->
-    <div class="box">
-      <label>Select Theatre</label>
-      <select id="theatre">
-        <option>Sri Rama Theatre</option>
-        <option>INOX</option>
-        <option>PVR Cinemas</option>
-        <option>Cinepolis</option>
-      </select>
+    <div class="movie-card">
+
+        <h2>Interstellar</h2>
+
+        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800"
+             alt="Movie">
+
+        <br><br>
+
+        <label>Select Theatre</label><br>
+
+        <select id="theatre">
+            <option>PVR Cinemas</option>
+            <option>INOX</option>
+            <option>Cinepolis</option>
+            <option>Sri Rama Theatre</option>
+        </select>
+
+        <br>
+
+        <label>Select Seats</label><br>
+
+        <select id="seats">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+
+        <br>
+
+        <button onclick="bookMovie()">Book Now</button>
+
+        <p id="result"></p>
+
     </div>
 
-    <!-- Seats -->
-    <h3>Select Seats</h3>
-    <div class="seats">
-      <div class="seat"></div>
-      <div class="seat"></div>
-      <div class="seat"></div>
-      <div class="seat"></div>
-      <div class="seat"></div>
-      <div class="seat"></div>
-      <div class="seat"></div>
-      <div class="seat"></div>
-    </div>
+    <script>
+        function bookMovie() {
+            let theatre =
+                document.getElementById("theatre").value;
 
-    <button onclick="bookNow()">Book Ticket</button>
+            let seats =
+                document.getElementById("seats").value;
 
-    <p id="result"></p>
+            document.getElementById("result").innerHTML =
+                "✅ " + seats +
+                " ticket(s) booked successfully at " +
+                theatre;
+        }
+    </script>
 
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
