@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RailOne Train Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f2f6ff;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #d32f2f;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b71c1c;
+        }
+
+        #ticket {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+
+        .tag {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚆 RailOne Train Booking</h1>
+
+    <label>Passenger Name</label>
+    <input type="text" id="name">
+
+    <label>From Station</label>
+    <input type="text" id="from">
+
+    <label>To Station</label>
+    <input type="text" id="to">
+
+    <label>Train Name</label>
+    <input type="text" id="train">
+
+    <label>Journey Date</label>
+    <input type="date" id="date">
+
+    <label>Class</label>
+    <select id="class">
+        <option>Sleeper</option>
+        <option>3A</option>
+        <option>2A</option>
+        <option>1A</option>
+    </select>
+
+    <button onclick="bookTrain()">Book Train</button>
+
+    <div id="ticket"></div>
+</div>
+
+<script>
+function bookTrain() {
+
+    let name = document.getElementById("name").value;
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let train = document.getElementById("train").value;
+    let date = document.getElementById("date").value;
+    let cls = document.getElementById("class").value;
+
+    let pnr = "RLN" + Math.floor(Math.random() * 1000000000);
+    let seat = Math.floor(Math.random() * 60) + 1;
+
+    document.getElementById("ticket").style.display = "block";
+    document.getElementById("ticket").innerHTML = `
+        <h2>🎫 Ticket Confirmed</h2>
+        <p><span class="tag">PNR:</span> ${pnr}</p>
+        <p><span class="tag">Passenger:</span> ${name}</p>
+        <p><span class="tag">Route:</span> ${from} ➜ ${to}</p>
+        <p><span class="tag">Train:</span> ${train}</p>
+        <p><span class="tag">Date:</span> ${date}</p>
+        <p><span class="tag">Class:</span> ${cls}</p>
+        <p><span class="tag">Seat No:</span> ${seat}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
