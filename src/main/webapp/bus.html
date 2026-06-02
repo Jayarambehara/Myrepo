@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bus Booking Portal</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:0;
+}
+
+.header{
+    background:#e63946;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:80%;
+    margin:auto;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
+
+input,select{
+    width:95%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button{
+    background:#e63946;
+    color:white;
+    border:none;
+    padding:12px;
+    width:100%;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#c1121f;
+}
+
+.result{
+    margin-top:20px;
+    font-weight:bold;
+    color:green;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>🚌 Bus Booking Portal</h1>
+</div>
+
+<div class="container">
+    <div class="card">
+
+        <h2>Book Your Journey</h2>
+
+        <label>From</label>
+        <input type="text" id="from" placeholder="Enter Source City">
+
+        <label>To</label>
+        <input type="text" id="to" placeholder="Enter Destination City">
+
+        <label>Select Bus Type</label>
+        <select id="bus">
+            <option>AC Sleeper</option>
+            <option>Non-AC Sleeper</option>
+            <option>AC Seater</option>
+            <option>Luxury Volvo</option>
+        </select>
+
+        <label>Passengers</label>
+        <select id="passengers">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+
+        <button onclick="bookBus()">Book Ticket</button>
+
+        <p id="result" class="result"></p>
+
+    </div>
+</div>
+
+<script>
+function bookBus(){
+
+    let from=document.getElementById("from").value;
+    let to=document.getElementById("to").value;
+    let bus=document.getElementById("bus").value;
+    let passengers=document.getElementById("passengers").value;
+
+    document.getElementById("result").innerHTML=
+    "✅ "+passengers+" ticket(s) booked from "+from+
+    " to "+to+" in "+bus;
+}
+</script>
+
+</body>
+</html>
