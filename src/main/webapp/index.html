@@ -1,123 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Rapido Bike Booking</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #fff7e6;
-            margin: 0;
-            padding: 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Booking Portal</title>
 
-        .container {
-            max-width: 700px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.2);
-        }
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+}
 
-        h1 {
-            text-align: center;
-            color: #ffcc00;
-        }
+.header{
+    background:#0077b6;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 12px;
-        }
+.container{
+    width:90%;
+    margin:auto;
+    margin-top:30px;
+}
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
 
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background: #ffcc00;
-            color: black;
-            border: none;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+}
 
-        button:hover {
-            background: #e6b800;
-        }
+.card h2{
+    margin-bottom:15px;
+}
 
-        #result {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #e8f5e9;
-            border-radius: 8px;
-        }
-    </style>
+.card a{
+    text-decoration:none;
+}
+
+.btn{
+    background:#0077b6;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#023e8a;
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>🏍️ Rapido Bike Booking</h1>
-
-    <label>Passenger Name</label>
-    <input type="text" id="name">
-
-    <label>Pickup Location</label>
-    <input type="text" id="pickup">
-
-    <label>Drop Location</label>
-    <input type="text" id="drop">
-
-    <label>Ride Type</label>
-    <select id="type">
-        <option>Bike</option>
-        <option>Bike Plus</option>
-        <option>Parcel Delivery</option>
-    </select>
-
-    <label>Date</label>
-    <input type="date" id="date">
-
-    <button onclick="bookRide()">Book Ride</button>
-
-    <div id="result"></div>
+<div class="header">
+    <h1>✈️ Travel Booking Portal</h1>
+    <p>Book Flights, Trains, Buses and Cabs</p>
 </div>
 
-<script>
-function bookRide() {
+<div class="container">
 
-    let name = document.getElementById("name").value;
-    let pickup = document.getElementById("pickup").value;
-    let drop = document.getElementById("drop").value;
-    let type = document.getElementById("type").value;
-    let date = document.getElementById("date").value;
+<div class="cards">
 
-    let rideId = "RPD" + Math.floor(Math.random() * 1000000);
-    let fare = Math.floor(Math.random() * 200) + 30;
+<div class="card">
+<h2>🚕 Uber</h2>
+<a href="uber.html"><button class="btn">Open</button></a>
+</div>
 
-    document.getElementById("result").style.display = "block";
-    document.getElementById("result").innerHTML = `
-        <h2>🏍️ Ride Confirmed</h2>
-        <p><b>Ride ID:</b> ${rideId}</p>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Pickup:</b> ${pickup}</p>
-        <p><b>Drop:</b> ${drop}</p>
-        <p><b>Ride Type:</b> ${type}</p>
-        <p><b>Date:</b> ${date}</p>
-        <p><b>Estimated Fare:</b> ₹${fare}</p>
-    `;
-}
-</script>
+<div class="card">
+<h2>🚖 Ola</h2>
+<a href="ola.html"><button class="btn">Open</button></a>
+</div>
+
+<div class="card">
+<h2>🏍️ Rapido</h2>
+<a href="rapido.html"><button class="btn">Open</button></a>
+</div>
+
+<div class="card">
+<h2>🚌 Bus Booking</h2>
+<a href="bus.html"><button class="btn">Open</button></a>
+</div>
+
+<div class="card">
+<h2>🎫 RedBus</h2>
+<a href="redbus.html"><button class="btn">Open</button></a>
+</div>
+
+<div class="card">
+<h2>🚆 Train Booking</h2>
+<a href="train.html"><button class="btn">Open</button></a>
+</div>
+
+<div class="card">
+<h2>🚄 RailOne</h2>
+<a href="railone.html"><button class="btn">Open</button></a>
+</div>
+
+<div class="card">
+<h2>✈️ Flight Booking</h2>
+<a href="flight.html"><button class="btn">Open</button></a>
+</div>
+
+</div>
+
+</div>
 
 </body>
 </html>
