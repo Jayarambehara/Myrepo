@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>TravelHub | Book Cabs, Bikes, Buses, Trains & Flights</title>
+    <title>TravelHub Pro | Login • Book • History • Payments</title>
     <style>
         * {
             margin: 0;
@@ -17,597 +17,641 @@
             min-height: 100vh;
         }
 
-        /* Header */
+        /* Header with user info */
         .main-header {
             background: linear-gradient(95deg, #0b2b3d, #1a5a7a);
             color: white;
-            padding: 2rem 2rem 1.5rem;
-            text-align: center;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-        .main-header h1 {
-            font-size: 2.3rem;
-            letter-spacing: -0.5px;
+        .logo h1 {
+            font-size: 1.6rem;
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 8px;
         }
-        .main-header p {
-            opacity: 0.9;
-            margin-top: 8px;
-            font-size: 1rem;
+        .logo p {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 18px;
+            border-radius: 40px;
+        }
+        .user-greeting {
+            font-weight: 500;
+        }
+        .auth-btn {
+            background: #ffb347;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #1e3a5f;
+        }
+        .auth-btn.logout {
+            background: #e74c3c;
+            color: white;
         }
 
         /* container */
         .portal-container {
             max-width: 1400px;
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             padding: 0 1.5rem;
         }
 
         /* service cards grid */
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 1.2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.8rem;
         }
         .service-card {
             background: white;
-            padding: 1.2rem 0.5rem;
-            border-radius: 1.5rem;
+            padding: 1rem 0.5rem;
+            border-radius: 1.2rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s ease;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border: 1px solid rgba(26,90,122,0.2);
         }
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 16px 28px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
             border-color: #1a5a7a;
-            background: #fefefe;
         }
-        .service-icon {
-            font-size: 2.4rem;
-            margin-bottom: 8px;
+        .service-icon { font-size: 2rem; margin-bottom: 5px; }
+        .service-card h3 { font-size: 0.9rem; color: #1e3a5f; }
+
+        /* Tabs: Booking / History */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px solid #cbd5e1;
         }
-        .service-card h3 {
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
             font-size: 1rem;
-            color: #1e3a5f;
+            font-weight: 600;
+            cursor: pointer;
+            color: #4a627a;
+            transition: 0.2s;
         }
-        .active-service {
-            background: #1a5a7a;
-            color: white;
-            border-color: #1a5a7a;
-            box-shadow: 0 10px 20px rgba(26,90,122,0.3);
-        }
-        .active-service h3 {
-            color: white;
+        .tab-btn.active {
+            color: #1a5a7a;
+            border-bottom: 3px solid #1a5a7a;
         }
 
-        /* main booking panel - MODAL / CARD style that opens when clicked */
+        /* booking panel */
         .booking-panel {
             background: rgba(255,255,255,0.98);
-            border-radius: 2rem;
-            padding: 2rem;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.15);
-            margin-top: 0.5rem;
-            border: 1px solid rgba(255,255,255,0.6);
-            transition: all 0.3s ease;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
         }
-
         .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 1.8rem;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
         }
-        .panel-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0b2b3d;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .close-panel {
-            background: #f1f5f9;
-            border: none;
-            font-size: 1.4rem;
-            cursor: pointer;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .close-panel:hover {
-            background: #e2e8f0;
-        }
+        .panel-title { font-size: 1.4rem; font-weight: 700; color: #0b2b3d; display: flex; align-items: center; gap: 10px; }
 
-        .booking-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
         }
         .input-group label {
             font-weight: 600;
+            font-size: 0.8rem;
             color: #1e4663;
-            font-size: 0.85rem;
-            letter-spacing: 0.3px;
         }
         .input-group input, .input-group select {
-            padding: 12px 14px;
+            padding: 10px 12px;
             border-radius: 1rem;
             border: 1.5px solid #e2e8f0;
             background: #fefefe;
-            font-size: 0.9rem;
-            transition: 0.2s;
         }
-        .input-group input:focus, .input-group select:focus {
-            outline: none;
-            border-color: #1a5a7a;
-            box-shadow: 0 0 0 3px rgba(26,90,122,0.2);
-        }
-
-        /* Cab / Bike type options */
         .ride-options {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-top: 5px;
         }
         .ride-type-btn {
             background: #f1f5f9;
-            padding: 10px 18px;
-            border-radius: 40px;
-            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
             cursor: pointer;
-            transition: all 0.2s;
             border: 1px solid #cbd5e1;
-            font-weight: 500;
         }
         .ride-type-btn.selected-ride {
             background: #1a5a7a;
             color: white;
-            border-color: #1a5a7a;
         }
-
         .book-btn {
             background: linear-gradient(95deg, #1a5a7a, #0b3b4f);
             color: white;
             border: none;
-            padding: 14px 28px;
-            font-size: 1rem;
-            font-weight: bold;
+            padding: 12px;
             border-radius: 2rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
             width: 100%;
             margin-top: 10px;
         }
-        .book-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.05);
-            box-shadow: 0 8px 18px rgba(26,90,122,0.4);
-        }
 
-        .confirmation-card {
-            margin-top: 1.8rem;
-            background: #e6f7f0;
-            border-radius: 1.2rem;
-            padding: 1.2rem 1.5rem;
-            border-left: 8px solid #2ecc71;
-            color: #0b3b2f;
-            font-weight: 500;
-            line-height: 1.5;
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            max-width: 400px;
+            width: 90%;
+            padding: 1.8rem;
+            border-radius: 1.5rem;
+            text-align: center;
+        }
+        .payment-option {
+            background: #f8fafc;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 1rem;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+        .payment-option:hover { background: #e6f7f0; }
+
+        /* History Table */
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .history-table th, .history-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .history-table th {
+            background: #1a5a7a;
+            color: white;
+        }
+        .empty-history {
+            text-align: center;
+            padding: 2rem;
+            color: #7e8aa8;
+        }
+        .fare-calendar {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
         }
 
         @media (max-width: 680px) {
-            .service-grid {
-                gap: 0.8rem;
-            }
-            .booking-panel {
-                padding: 1.2rem;
-            }
-            .panel-title {
-                font-size: 1.3rem;
-            }
+            .service-grid { gap: 0.6rem; }
+            .tab-btn { padding: 8px 16px; }
         }
     </style>
 </head>
 <body>
 
 <div class="main-header">
-    <h1>
-        <span>🌍</span> TravelHub Express
-    </h1>
-    <p>Click any card — Book Cabs • Bikes • Buses • Trains • Flights instantly</p>
+    <div class="logo">
+        <h1>🌍 TravelHub Pro</h1>
+        <p>Flights • Trains • Buses • Cabs</p>
+    </div>
+    <div class="user-area" id="userArea">
+        <span class="user-greeting" id="userGreeting">👋 Guest</span>
+        <button class="auth-btn" id="authBtn">Login / Signup</button>
+    </div>
 </div>
 
 <div class="portal-container">
-    <!-- All service cards (each opens its own booking interface) -->
     <div class="service-grid" id="serviceGrid"></div>
 
-    <!-- Dynamic Booking Panel (will show details based on selected service) -->
-    <div class="booking-panel" id="bookingPanel">
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="booking">📅 Book Travel</button>
+        <button class="tab-btn" data-tab="history">📜 Booking History</button>
+    </div>
+
+    <!-- Booking Panel -->
+    <div id="bookingTab" class="booking-panel">
         <div class="panel-header">
-            <div class="panel-title" id="panelTitle">
-                <span>🚕</span> Select a service
-            </div>
-            <button class="close-panel" id="closePanelBtn">✕ Close</button>
+            <div class="panel-title" id="panelTitle"><span>🚕</span> Select a service</div>
         </div>
         <div id="dynamicFormContainer">
-            <p style="color:#5a6e7c; text-align:center; padding:2rem;">✨ Click on any travel option above to start booking</p>
+            <p style="color:#5a6e7c; text-align:center; padding:1rem;">✨ Click any travel option above to start booking</p>
         </div>
-        <div id="bookingResult" style="display: none;"></div>
+    </div>
+
+    <!-- History Panel (hidden initially) -->
+    <div id="historyTab" style="display: none;" class="booking-panel">
+        <div class="panel-header">
+            <div class="panel-title">📜 My Booking History</div>
+        </div>
+        <div id="historyList"></div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <h3>💳 Complete Payment</h3>
+        <p id="paymentAmount" style="margin: 10px 0; font-size: 1.3rem; color: #1a5a7a;"></p>
+        <div id="paymentOptions">
+            <div class="payment-option" data-method="card">💳 Credit/Debit Card</div>
+            <div class="payment-option" data-method="upi">📱 UPI (Google Pay / PhonePe)</div>
+            <div class="payment-option" data-method="wallet">💰 Wallet (PayTM / Amazon Pay)</div>
+        </div>
+        <button id="closePaymentModal" style="margin-top: 15px; background: #ccc; border: none; padding: 8px; border-radius: 2rem; cursor: pointer;">Cancel</button>
     </div>
 </div>
 
 <script>
-    // ---------- SERVICE MASTER DATA (every option with complete fields) ----------
-    const services = [
-        { 
-            id: "uber", name: "Uber", icon: "🚕", displayName: "🚕 Uber",
-            type: "cab", provider: "Uber", 
-            fields: ["pickup", "drop", "date", "time"],
-            rideTypes: ["Economy", "Premium", "UberXL", "Comfort"]
-        },
-        { 
-            id: "ola", name: "Ola", icon: "🚖", displayName: "🚖 Ola",
-            type: "cab", provider: "Ola Cabs",
-            fields: ["pickup", "drop", "date", "time"],
-            rideTypes: ["Micro", "Mini", "Prime Sedan", "Prime SUV"]
-        },
-        { 
-            id: "rapido", name: "Rapido", icon: "🏍️", displayName: "🏍️ Rapido Bike",
-            type: "bike", provider: "Rapido",
-            fields: ["pickup", "drop", "date", "time"],
-            rideTypes: ["Bike Taxi", "Auto", "Rapido Moto"]
-        },
-        { 
-            id: "bus", name: "Bus Booking", icon: "🚌", displayName: "🚌 State Bus",
-            type: "bus", provider: "StateRoadways",
-            fields: ["from", "to", "date", "busType"],
-            busOptions: ["Standard", "AC Sleeper", "Volvo AC", "Luxury"]
-        },
-        { 
-            id: "redbus", name: "RedBus", icon: "🎫", displayName: "🎫 RedBus",
-            type: "bus", provider: "RedBus",
-            fields: ["from", "to", "date", "busType"],
-            busOptions: ["Rajahamsa", "Garuda", "Sleeper Coach", "Ultra Deluxe"]
-        },
-        { 
-            id: "train", name: "Train Booking", icon: "🚆", displayName: "🚆 IRCTC Train",
-            type: "train", provider: "IRCTC",
-            fields: ["from", "to", "date", "classType"],
-            classOptions: ["Sleeper", "AC 3 Tier", "AC 2 Tier", "First Class", "Chair Car"]
-        },
-        { 
-            id: "railone", name: "RailOne", icon: "🚄", displayName: "🚄 RailOne Premium",
-            type: "train", provider: "RailOne",
-            fields: ["from", "to", "date", "classType"],
-            classOptions: ["Executive", "Business Class", "Premium Chair", "Sleeper"]
-        },
-        { 
-            id: "flight", name: "Flight Booking", icon: "✈️", displayName: "✈️ Flight",
-            type: "flight", provider: "SkyScanners",
-            fields: ["from", "to", "departDate", "returnDate", "passengers"],
-            flightClass: ["Economy", "Premium Economy", "Business"]
+    // ---------- USER STATE ----------
+    let currentUser = null;  // { name, email, bookings[] }
+    let pendingBookingData = null; // store before payment
+
+    // Load from localStorage
+    function loadUserData() {
+        const saved = localStorage.getItem("travelhub_user");
+        if (saved) {
+            currentUser = JSON.parse(saved);
+        } else {
+            currentUser = null;
         }
+        updateUserUI();
+    }
+    function saveUserData() {
+        if (currentUser) {
+            localStorage.setItem("travelhub_user", JSON.stringify(currentUser));
+        } else {
+            localStorage.removeItem("travelhub_user");
+        }
+    }
+
+    function updateUserUI() {
+        const greetingSpan = document.getElementById("userGreeting");
+        const authBtn = document.getElementById("authBtn");
+        if (currentUser) {
+            greetingSpan.innerHTML = `👤 ${currentUser.name}`;
+            authBtn.innerHTML = "Logout";
+            authBtn.classList.add("logout");
+        } else {
+            greetingSpan.innerHTML = "👋 Guest";
+            authBtn.innerHTML = "Login / Signup";
+            authBtn.classList.remove("logout");
+        }
+    }
+
+    // Simple Login Modal (prompt based but nice)
+    function showLoginModal() {
+        const name = prompt("Enter your name:", "Traveler");
+        if (name && name.trim()) {
+            const email = prompt("Enter your email:", `${name.toLowerCase().replace(/\s/g, '')}@example.com`);
+            if (email) {
+                currentUser = {
+                    name: name.trim(),
+                    email: email.trim(),
+                    bookings: currentUser?.bookings || []
+                };
+                saveUserData();
+                updateUserUI();
+                renderHistoryTab(); // refresh history if visible
+                alert(`✅ Welcome ${currentUser.name}! You can now book and see history.`);
+            }
+        }
+    }
+
+    function logout() {
+        currentUser = null;
+        saveUserData();
+        updateUserUI();
+        renderHistoryTab();
+        alert("Logged out successfully.");
+    }
+
+    // ---------- SERVICE DATA ----------
+    const services = [
+        { id: "uber", name: "Uber", icon: "🚕", displayName: "🚕 Uber", type: "cab", provider: "Uber", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Economy", "Premium", "UberXL"] },
+        { id: "ola", name: "Ola", icon: "🚖", displayName: "🚖 Ola", type: "cab", provider: "Ola", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Micro", "Mini", "Prime Sedan"] },
+        { id: "rapido", name: "Rapido", icon: "🏍️", displayName: "🏍️ Rapido", type: "bike", provider: "Rapido", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Bike Taxi", "Auto"] },
+        { id: "bus", name: "Bus", icon: "🚌", displayName: "🚌 State Bus", type: "bus", provider: "StateRoadways", fields: ["from", "to", "date", "busType"], busOptions: ["Standard", "AC Sleeper", "Volvo"] },
+        { id: "redbus", name: "RedBus", icon: "🎫", displayName: "🎫 RedBus", type: "bus", provider: "RedBus", fields: ["from", "to", "date", "busType"], busOptions: ["Rajahamsa", "Garuda"] },
+        { id: "train", name: "Train", icon: "🚆", displayName: "🚆 IRCTC", type: "train", provider: "IRCTC", fields: ["from", "to", "date", "classType"], classOptions: ["Sleeper", "AC 3 Tier", "AC 2 Tier"] },
+        { id: "railone", name: "RailOne", icon: "🚄", displayName: "🚄 RailOne", type: "train", provider: "RailOne", fields: ["from", "to", "date", "classType"], classOptions: ["Executive", "Business"] },
+        { id: "flight", name: "Flight", icon: "✈️", displayName: "✈️ Flight", type: "flight", provider: "SkyScanners", fields: ["from", "to", "departDate", "returnDate", "passengers"], flightClass: ["Economy", "Business"] }
     ];
 
     let currentService = null;
-    let selectedRideVariant = "";  // for cab/bike type
+    let selectedRideVariant = "";
 
-    // Helper: render service cards
     function renderServiceCards() {
         const grid = document.getElementById("serviceGrid");
         if (!grid) return;
         grid.innerHTML = "";
         services.forEach(service => {
             const card = document.createElement("div");
-            card.className = `service-card`;
-            card.innerHTML = `
-                <div class="service-icon">${service.icon}</div>
-                <h3>${service.displayName}</h3>
-            `;
-            card.addEventListener("click", () => {
-                openBookingInterface(service);
-            });
+            card.className = "service-card";
+            card.innerHTML = `<div class="service-icon">${service.icon}</div><h3>${service.displayName}</h3>`;
+            card.addEventListener("click", () => openBookingInterface(service));
             grid.appendChild(card);
         });
     }
 
-    // Open booking panel for specific service (cab, bike, bus, train, flight)
-    function openBookingInterface(service) {
-        currentService = service;
-        selectedRideVariant = (service.rideTypes && service.rideTypes[0]) || (service.busOptions && service.busOptions[0]) || (service.classOptions && service.classOptions[0]) || (service.flightClass && service.flightClass[0]) || "Standard";
-        
-        // Update panel title
-        const panelTitleDiv = document.getElementById("panelTitle");
-        if (panelTitleDiv) {
-            panelTitleDiv.innerHTML = `<span>${service.icon}</span> ${service.displayName} Booking`;
+    function getFieldHTML(fieldName, service) {
+        const labels = {
+            pickup: { label: "📍 Pickup", type: "text", placeholder: "Enter address", required: true },
+            drop: { label: "🏁 Drop", type: "text", placeholder: "Destination", required: true },
+            date: { label: "📅 Date", type: "date", required: true },
+            time: { label: "⏰ Time", type: "time", required: true },
+            from: { label: "🏙️ From", type: "text", placeholder: "City", required: true },
+            to: { label: "📍 To", type: "text", placeholder: "City", required: true },
+            busType: { label: "🚌 Bus Type", type: "select", options: service.busOptions || ["Standard"], required: true },
+            classType: { label: "🎫 Class", type: "select", options: service.classOptions || ["Sleeper"], required: true },
+            departDate: { label: "✈️ Depart", type: "date", required: true },
+            returnDate: { label: "🔄 Return", type: "date", required: false },
+            passengers: { label: "👥 Passengers", type: "number", min: 1, max: 9, required: true }
+        };
+        const cfg = labels[fieldName];
+        if (!cfg) return `<div class="input-group"><label>${fieldName}</label><input type="text" id="${fieldName}"></div>`;
+        if (cfg.type === "select" && cfg.options) {
+            let opts = cfg.options.map(o => `<option value="${o}">${o}</option>`).join('');
+            return `<div class="input-group"><label>${cfg.label}</label><select id="${fieldName}">${opts}</select></div>`;
         }
-        
-        // Generate dynamic form
-        const formContainer = document.getElementById("dynamicFormContainer");
-        const resultDiv = document.getElementById("bookingResult");
-        if (resultDiv) resultDiv.style.display = "none";
-        
+        if (cfg.type === "number") {
+            return `<div class="input-group"><label>${cfg.label}</label><input type="number" id="${fieldName}" min="${cfg.min}" max="${cfg.max}"></div>`;
+        }
+        return `<div class="input-group"><label>${cfg.label}</label><input type="${cfg.type}" id="${fieldName}" placeholder="${cfg.placeholder || ''}"></div>`;
+    }
+
+    function openBookingInterface(service) {
+        if (!service) return;
+        currentService = service;
+        selectedRideVariant = (service.rideTypes && service.rideTypes[0]) || (service.busOptions && service.busOptions[0]) || (service.classOptions && service.classOptions[0]) || "Standard";
+        const panelTitle = document.getElementById("panelTitle");
+        panelTitle.innerHTML = `<span>${service.icon}</span> ${service.displayName} Booking`;
+
         let html = `<div class="booking-form">`;
-        
-        // build fields rows based on service.fields
-        const fieldsList = service.fields;
-        // split into rows of 2
-        for (let i = 0; i < fieldsList.length; i += 2) {
+        const fields = service.fields;
+        for (let i = 0; i < fields.length; i += 2) {
             html += `<div class="form-row">`;
-            // first field
-            const f1 = fieldsList[i];
-            if (f1) html += getFieldHTML(f1, service);
-            // second field
-            const f2 = fieldsList[i+1];
-            if (f2) html += getFieldHTML(f2, service);
+            if (fields[i]) html += getFieldHTML(fields[i], service);
+            if (fields[i+1]) html += getFieldHTML(fields[i+1], service);
             html += `</div>`;
         }
-        
-        // SPECIAL UI: Ride type selection for cabs and bikes
         if (service.type === "cab" || service.type === "bike") {
-            const rideOptions = service.rideTypes || ["Economy", "Premium", "SUV"];
-            html += `<div class="input-group">
-                        <label>🚗 Select Ride / Vehicle Type</label>
-                        <div class="ride-options" id="rideTypeSelector">`;
-            rideOptions.forEach(opt => {
-                const isSelected = (opt === selectedRideVariant);
-                html += `<div data-ride="${opt}" class="ride-type-btn ${isSelected ? 'selected-ride' : ''}">${opt}</div>`;
+            html += `<div class="input-group"><label>🚗 Ride Type</label><div class="ride-options" id="rideTypeSelector">`;
+            (service.rideTypes || ["Economy"]).forEach(opt => {
+                html += `<div data-ride="${opt}" class="ride-type-btn ${opt === selectedRideVariant ? 'selected-ride' : ''}">${opt}</div>`;
             });
             html += `</div></div>`;
         }
-        
-        // For bus: add bus type selection already inside fields? but we also add extra boarding point
         if (service.type === "bus") {
-            const busOpts = service.busOptions || ["Standard", "AC", "Sleeper"];
-            html += `<div class="input-group">
-                        <label>🚏 Boarding Point (optional)</label>
-                        <input type="text" id="boardingPoint" placeholder="City center / Bus stand">
-                    </div>`;
+            html += `<div class="input-group"><label>🚏 Boarding Point</label><input type="text" id="boardingPoint" placeholder="Optional"></div>`;
         }
-        
-        // For train: extra berth preference
         if (service.type === "train") {
-            html += `<div class="input-group">
-                        <label>🛏️ Berth Preference (optional)</label>
-                        <select id="berthPref">
-                            <option>No preference</option>
-                            <option>Lower Berth</option>
-                            <option>Upper Berth</option>
-                            <option>Window Side</option>
-                        </select>
-                    </div>`;
+            html += `<div class="input-group"><label>🛏️ Berth</label><select id="berthPref"><option>No pref</option><option>Lower</option><option>Upper</option></select></div>`;
         }
-        
-        // For flight: extra meal preference
-        if (service.type === "flight") {
-            html += `<div class="input-group">
-                        <label>🍽️ Meal / Seat Preference (optional)</label>
-                        <input type="text" id="flightExtra" placeholder="e.g., Vegetarian meal, aisle seat">
-                    </div>`;
-        }
-        
-        html += `<button class="book-btn" id="bookingActionBtn">✅ Confirm ${service.displayName} Booking</button>
-                </div>`;
-        formContainer.innerHTML = html;
-        
-        // attach ride type selector event if cab/bike
+        // Fare Calendar hint
+        html += `<div class="fare-calendar">📊 Fare Calendar: ${getFareHint(service.type)} estimated prices shown at booking.</div>`;
+        html += `<button class="book-btn" id="proceedToPayBtn">💳 Proceed to Payment</button></div>`;
+        document.getElementById("dynamicFormContainer").innerHTML = html;
+
+        // ride selector
         if (service.type === "cab" || service.type === "bike") {
-            const rideBtns = document.querySelectorAll('.ride-type-btn');
-            rideBtns.forEach(btn => {
+            document.querySelectorAll('.ride-type-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    rideBtns.forEach(b => b.classList.remove('selected-ride'));
+                    document.querySelectorAll('.ride-type-btn').forEach(b => b.classList.remove('selected-ride'));
                     this.classList.add('selected-ride');
-                    selectedRideVariant = this.getAttribute('data-ride') || "Standard";
+                    selectedRideVariant = this.getAttribute('data-ride');
                 });
             });
         }
-        
-        // attach booking button listener
-        const bookButton = document.getElementById("bookingActionBtn");
-        if (bookButton) {
-            bookButton.addEventListener("click", () => performBooking(currentService));
-        }
+        document.getElementById("proceedToPayBtn").addEventListener("click", () => showPaymentModal(service));
     }
-    
-    // Helper to generate field HTML based on field name and service context
-    function getFieldHTML(fieldName, service) {
-        const labels = {
-            pickup: { label: "📍 Pickup Location", type: "text", placeholder: "Enter pickup address", required: true },
-            drop: { label: "🏁 Drop Location", type: "text", placeholder: "Enter destination", required: true },
-            date: { label: "📅 Travel Date", type: "date", required: true },
-            time: { label: "⏰ Pickup Time", type: "time", required: true },
-            from: { label: "🏙️ From (City/Station)", type: "text", placeholder: "e.g., Delhi", required: true },
-            to: { label: "📍 To (Destination)", type: "text", placeholder: "e.g., Mumbai", required: true },
-            busType: { label: "🚌 Bus Type", type: "select", options: service.busOptions || ["Standard", "AC", "Volvo"], required: true },
-            classType: { label: "🎫 Travel Class", type: "select", options: service.classOptions || ["Sleeper", "AC 3 Tier", "AC 2 Tier"], required: true },
-            departDate: { label: "✈️ Departure Date", type: "date", required: true },
-            returnDate: { label: "🔄 Return Date (optional)", type: "date", required: false },
-            passengers: { label: "👥 Passengers", type: "number", min: 1, max: 9, placeholder: "1", required: true }
-        };
-        
-        const config = labels[fieldName];
-        if (!config) return `<div class="input-group"><label>${fieldName}</label><input type="text" placeholder="Enter ${fieldName}" id="${fieldName}" /></div>`;
-        
-        const { label, type, placeholder, options, min, max, required } = config;
-        const reqAttr = required ? "required" : "";
-        
-        if (type === "select" && options) {
-            let selectHtml = `<div class="input-group"><label>${label}</label><select id="${fieldName}">`;
-            options.forEach(opt => {
-                selectHtml += `<option value="${opt}">${opt}</option>`;
-            });
-            selectHtml += `</select></div>`;
-            return selectHtml;
-        }
-        if (type === "number") {
-            return `<div class="input-group"><label>${label}</label><input type="number" id="${fieldName}" min="${min || 1}" max="${max || 9}" placeholder="${placeholder || ''}" ${reqAttr}></div>`;
-        }
-        return `<div class="input-group"><label>${label}</label><input type="${type}" id="${fieldName}" placeholder="${placeholder || ''}" ${reqAttr}></div>`;
+
+    function getFareHint(type) {
+        if (type === "cab") return "₹150-500";
+        if (type === "bike") return "₹35-120";
+        if (type === "bus") return "₹300-1500";
+        if (type === "train") return "₹400-3000";
+        if (type === "flight") return "₹3000-15000";
+        return "₹200-2000";
     }
-    
-    // Core booking function (real confirmation for cabs, bikes, etc.)
-    function performBooking(service) {
-        if (!service) return;
-        
-        // Gather form values based on fields
-        const formData = {};
-        let missingFields = [];
-        
-        for (let f of service.fields) {
-            const inputEl = document.getElementById(f);
-            if (inputEl) {
-                let val = inputEl.value.trim();
-                if ((f === "date" || f === "departDate" || f === "returnDate" || f === "time") && val === "") {
-                    if (f !== "returnDate") missingFields.push(f);
-                } else if (f !== "returnDate" && val === "" && getRequiredStatus(f, service)) {
-                    missingFields.push(f);
-                }
-                formData[f] = val || "Not specified";
-            } else {
-                formData[f] = "Not provided";
-            }
-        }
-        
-        // validation for mandatory fields (cab pickup/drop, etc)
-        if (service.type === "cab" || service.type === "bike") {
-            if (!formData.pickup || formData.pickup === "Not specified") missingFields.push("pickup");
-            if (!formData.drop || formData.drop === "Not specified") missingFields.push("drop");
-            if (!formData.date || formData.date === "Not specified") missingFields.push("date");
-        }
-        
-        if (service.type === "bus" && (!formData.from || !formData.to)) missingFields.push("from/to");
-        if (service.type === "train" && (!formData.from || !formData.to)) missingFields.push("from/to");
-        if (service.type === "flight" && (!formData.from || !formData.to || !formData.departDate)) missingFields.push("origin/destination/departure");
-        
-        if (missingFields.length > 0) {
-            showResultMessage(`⚠️ Please fill required fields: ${missingFields.join(", ")}`, true);
+
+    // Payment Modal & Booking with History
+    function showPaymentModal(service) {
+        if (!currentUser) {
+            alert("🔐 Please login/signup first to complete booking!");
+            showLoginModal();
             return;
         }
-        
-        // Build dynamic booking details message
-        let bookingDetails = "";
-        let rideSelectedText = "";
+        // collect form data
+        const formData = {};
+        for (let f of service.fields) {
+            const el = document.getElementById(f);
+            if (el) formData[f] = el.value.trim() || "Not specified";
+        }
+        if (service.type === "cab" && (!formData.pickup || !formData.drop)) {
+            alert("Please fill pickup and drop locations.");
+            return;
+        }
+        if ((service.type === "bus" || service.type === "train") && (!formData.from || !formData.to)) {
+            alert("Please fill origin and destination.");
+            return;
+        }
+        if (service.type === "flight" && (!formData.from || !formData.to || !formData.departDate)) {
+            alert("Flight: fill origin, destination and departure date.");
+            return;
+        }
+
+        let rideVariant = "";
         if (service.type === "cab" || service.type === "bike") {
-            const selectedRideElem = document.querySelector('.ride-type-btn.selected-ride');
-            rideSelectedText = selectedRideElem ? selectedRideElem.innerText : selectedRideVariant;
-            bookingDetails = `🚖 ${service.provider} • ${rideSelectedText} ride from "${formData.pickup}" → "${formData.drop}" on ${formData.date} at ${formData.time}`;
-        } 
-        else if (service.type === "bus") {
-            const busTypeSelect = document.getElementById("busType");
-            const busTypeVal = busTypeSelect ? busTypeSelect.value : (service.busOptions?.[0] || "Standard");
-            const boarding = document.getElementById("boardingPoint")?.value || "Default Terminal";
-            bookingDetails = `🚌 ${service.provider} Bus | ${formData.from} ➔ ${formData.to} | Date: ${formData.date} | Bus: ${busTypeVal} | Boarding: ${boarding}`;
+            const selected = document.querySelector('.ride-type-btn.selected-ride');
+            rideVariant = selected ? selected.innerText : selectedRideVariant;
         }
-        else if (service.type === "train") {
-            const trainClass = document.getElementById("classType")?.value || (service.classOptions?.[0] || "Sleeper");
-            const berth = document.getElementById("berthPref")?.value || "No preference";
-            bookingDetails = `🚆 ${service.provider} Train | ${formData.from} ➔ ${formData.to} | Class: ${trainClass} | Date: ${formData.date} | Berth: ${berth}`;
-        }
-        else if (service.type === "flight") {
-            const passengers = formData.passengers || 1;
-            const returnInfo = (formData.returnDate && formData.returnDate !== "") ? `Return: ${formData.returnDate}` : "One Way";
-            const extraNote = document.getElementById("flightExtra")?.value || "No preference";
-            bookingDetails = `✈️ Flight | ${formData.from} ✈️ ${formData.to} | Depart: ${formData.departDate} | ${returnInfo} | Pax: ${passengers} | ${extraNote}`;
-        }
+        let extra = "";
+        if (service.type === "bus") extra = document.getElementById("boardingPoint")?.value || "";
+        if (service.type === "train") extra = document.getElementById("berthPref")?.value || "";
         
-        // Generate realistic fare based on type (cab/bike etc)
-        let totalFare = 0;
-        if (service.type === "cab") totalFare = Math.floor(Math.random() * 450 + 150);
-        else if (service.type === "bike") totalFare = Math.floor(Math.random() * 100 + 35);
-        else if (service.type === "bus") totalFare = Math.floor(Math.random() * 1200 + 300);
-        else if (service.type === "train") totalFare = Math.floor(Math.random() * 2800 + 400);
-        else if (service.id === "flight") totalFare = Math.floor(Math.random() * 15000 + 3000);
-        else totalFare = Math.floor(Math.random() * 800 + 200);
-        
-        const bookingRef = `THB-${Math.floor(Math.random() * 90000 + 10000)}`;
-        const currentTime = new Date().toLocaleString();
-        
-        let successMessage = `
-            ✅ <strong>Booking Confirmed Successfully!</strong><br>
-            🧾 Service: ${service.displayName} (${service.provider})<br>
-            📍 Trip Details: ${bookingDetails}<br>
-            💰 Total Amount: ₹${totalFare} (taxes inclusive)<br>
-            🆔 Booking ID: ${bookingRef}<br>
-            📅 Booked on: ${currentTime}<br>
-            📱 E-ticket & confirmation sent to your mobile. <span style="font-size:0.85rem;">✨ Enjoy your journey with TravelHub!</span>
-        `;
-        
-        showResultMessage(successMessage, false);
-        
-        // optional: scroll to result
-        const resultDiv = document.getElementById("bookingResult");
-        if (resultDiv) resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // calculate fare (simulated)
+        let fare = 0;
+        if (service.type === "cab") fare = Math.floor(Math.random() * 400 + 150);
+        else if (service.type === "bike") fare = Math.floor(Math.random() * 90 + 35);
+        else if (service.type === "bus") fare = Math.floor(Math.random() * 1200 + 300);
+        else if (service.type === "train") fare = Math.floor(Math.random() * 2500 + 400);
+        else if (service.type === "flight") fare = Math.floor(Math.random() * 12000 + 3000);
+        else fare = 500;
+
+        pendingBookingData = {
+            service: service,
+            formData: formData,
+            rideVariant: rideVariant,
+            extra: extra,
+            fare: fare,
+            timestamp: new Date().toISOString()
+        };
+        document.getElementById("paymentAmount").innerHTML = `Total: ₹${fare}`;
+        document.getElementById("paymentModal").style.display = "flex";
     }
-    
-    function getRequiredStatus(fieldName, service) {
-        if (fieldName === "returnDate") return false;
-        if (fieldName === "passengers") return true;
-        if (fieldName === "pickup" || fieldName === "drop" || fieldName === "from" || fieldName === "to") return true;
-        if (fieldName === "date" || fieldName === "departDate") return true;
-        return true;
-    }
-    
-    function showResultMessage(message, isError) {
-        const resultDiv = document.getElementById("bookingResult");
-        if (!resultDiv) return;
-        resultDiv.style.display = "block";
-        resultDiv.className = "confirmation-card";
-        resultDiv.style.background = isError ? "#fff0e6" : "#e6f7f0";
-        resultDiv.style.borderLeftColor = isError ? "#e67e22" : "#2ecc71";
-        resultDiv.style.color = isError ? "#a33f00" : "#0b3b2f";
-        resultDiv.innerHTML = message;
-        // auto scroll
-        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-    
-    // close panel / reset to idle state
-    function closeBookingPanel() {
-        currentService = null;
-        const panelTitleDiv = document.getElementById("panelTitle");
-        if (panelTitleDiv) {
-            panelTitleDiv.innerHTML = `<span>✨</span> Select a travel option`;
+
+    function completeBooking(paymentMethod) {
+        if (!pendingBookingData || !currentUser) return;
+        const { service, formData, rideVariant, extra, fare, timestamp } = pendingBookingData;
+        const bookingRef = `THB-${Math.floor(Math.random()*90000+10000)}`;
+        let details = "";
+        if (service.type === "cab" || service.type === "bike") {
+            details = `${service.provider} • ${rideVariant} | ${formData.pickup} → ${formData.drop} on ${formData.date} ${formData.time}`;
+        } else if (service.type === "bus") {
+            const busType = formData.busType || "Standard";
+            details = `${service.provider} Bus | ${formData.from} → ${formData.to} | ${formData.date} | ${busType} | Boarding: ${extra || "Default"}`;
+        } else if (service.type === "train") {
+            const trainClass = formData.classType || "Sleeper";
+            details = `${service.provider} Train | ${formData.from} → ${formData.to} | ${trainClass} | ${formData.date} | Berth: ${extra}`;
+        } else if (service.type === "flight") {
+            const returnInfo = formData.returnDate ? `Return ${formData.returnDate}` : "One Way";
+            details = `Flight ${formData.from}✈️${formData.to} | ${formData.departDate} | Pax:${formData.passengers || 1} | ${returnInfo}`;
         }
-        const formContainer = document.getElementById("dynamicFormContainer");
-        if (formContainer) {
-            formContainer.innerHTML = `<p style="color:#5a6e7c; text-align:center; padding:2rem;">🚀 Click any card — Uber, Ola, Rapido, Bus, Train, Flight — to book instantly</p>`;
-        }
-        const resultDiv = document.getElementById("bookingResult");
-        if (resultDiv) resultDiv.style.display = "none";
+        const booking = {
+            id: bookingRef,
+            serviceName: service.displayName,
+            provider: service.provider,
+            details: details,
+            fare: fare,
+            paymentMethod: paymentMethod,
+            bookedOn: new Date().toLocaleString(),
+            timestamp: timestamp
+        };
+        if (!currentUser.bookings) currentUser.bookings = [];
+        currentUser.bookings.unshift(booking);
+        saveUserData();
+        alert(`✅ Booking Confirmed!\nRef: ${bookingRef}\n₹${fare} paid via ${paymentMethod}\nDetails: ${details}`);
+        document.getElementById("paymentModal").style.display = "none";
+        pendingBookingData = null;
+        renderHistoryTab();
+        // Switch to history tab automatically
+        document.querySelector('.tab-btn[data-tab="history"]').click();
     }
-    
-    // Event listeners and initialization
-    function initPortal() {
+
+    function renderHistoryTab() {
+        const historyDiv = document.getElementById("historyList");
+        if (!historyDiv) return;
+        if (!currentUser || !currentUser.bookings || currentUser.bookings.length === 0) {
+            historyDiv.innerHTML = `<div class="empty-history">📭 No bookings yet. Click any service and complete payment to see history.</div>`;
+            return;
+        }
+        let tableHtml = `<table class="history-table"><thead><tr><th>ID</th><th>Service</th><th>Details</th><th>Fare</th><th>Payment</th><th>Booked On</th></tr></thead><tbody>`;
+        currentUser.bookings.forEach(b => {
+            tableHtml += `<tr>
+                <td>${b.id}</td>
+                <td>${b.serviceName}</td>
+                <td style="max-width:250px; word-break:break-word;">${b.details.substring(0,80)}</td>
+                <td>₹${b.fare}</td>
+                <td>${b.paymentMethod}</td>
+                <td>${b.bookedOn}</td>
+            </tr>`;
+        });
+        tableHtml += `</tbody></table>`;
+        historyDiv.innerHTML = tableHtml;
+    }
+
+    // Tab switching
+    function initTabs() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const bookingTab = document.getElementById('bookingTab');
+        const historyTabDiv = document.getElementById('historyTab');
+        tabs.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabs.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const tabName = btn.getAttribute('data-tab');
+                if (tabName === 'booking') {
+                    bookingTab.style.display = 'block';
+                    historyTabDiv.style.display = 'none';
+                } else {
+                    bookingTab.style.display = 'none';
+                    historyTabDiv.style.display = 'block';
+                    renderHistoryTab();
+                }
+            });
+        });
+    }
+
+    // Payment modal listeners
+    function initPaymentModal() {
+        const modal = document.getElementById('paymentModal');
+        document.querySelectorAll('.payment-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                const method = opt.getAttribute('data-method');
+                completeBooking(method);
+            });
+        });
+        document.getElementById('closePaymentModal').addEventListener('click', () => {
+            modal.style.display = 'none';
+            pendingBookingData = null;
+        });
+        window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+    }
+
+    // Auth button
+    function initAuth() {
+        document.getElementById('authBtn').addEventListener('click', () => {
+            if (currentUser) logout();
+            else showLoginModal();
+        });
+    }
+
+    function init() {
+        loadUserData();
         renderServiceCards();
-        const closeBtn = document.getElementById("closePanelBtn");
-        if (closeBtn) {
-            closeBtn.addEventListener("click", closeBookingPanel);
-        }
+        initTabs();
+        initAuth();
+        initPaymentModal();
+        // default booking panel hint
+        document.getElementById("dynamicFormContainer").innerHTML = `<p style="color:#5a6e7c; text-align:center; padding:1rem;">✨ Click any travel card — Uber, Ola, Bus, Train, Flight — to book with payment & history</p>`;
     }
-    
-    window.addEventListener("DOMContentLoaded", initPortal);
+    init();
 </script>
 </body>
 </html>
